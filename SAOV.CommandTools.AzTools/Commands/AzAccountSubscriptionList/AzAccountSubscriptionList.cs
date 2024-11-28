@@ -22,7 +22,7 @@
                 var tableProperties = new Table()
                     .Centered()
                     .Border(TableBorder.None)
-                    .Caption(($"[blue]Total Subscription {azAccountSubscriptionListEntity.Length}[/]"))
+                    .Caption(($"[blue]Total Subscriptions {azAccountSubscriptionListEntity.Length}[/]"))
                     .AddColumn(new TableColumn(string.Empty).LeftAligned())
                     .AddColumn(new TableColumn(string.Empty).LeftAligned())
                     .AddColumn(new TableColumn(string.Empty).LeftAligned());
@@ -35,7 +35,7 @@
                 var tablePrincipal = new Table()
                     .Border(TableBorder.Square)
                     .BorderColor(Color.Grey)
-                    .AddColumn(new TableColumn(new Markup("[aqua]Az Account Subscription List[/]")).Centered())
+                    .AddColumn(new TableColumn(new Markup("[aqua]Azure Subscriptions [/]")).Centered())
                     .AddRow(tableProperties);
                 AnsiConsole.Write(tablePrincipal);
             }));

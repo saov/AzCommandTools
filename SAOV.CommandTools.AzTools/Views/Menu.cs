@@ -12,31 +12,35 @@
         {
             List<string> choices = [];
             bool run = true;
-            Enum.GetValues<MenuOptions>().ToList().ForEach(item => { choices.Add(item.ToString()); });
+            Enum.GetValues<MenuOptionsEnum>().ToList().ForEach(item => { choices.Add(item.ToString()); });
             Func<string, string> displaySelector = str =>
             {
-                return $"[93]{str}[/]";
+                if (Enum.TryParse(str, out MenuOptionsEnum menuOptions))
+                {
+                    return $"[93]{menuOptions.ToName()}[/]";
+                }
+                throw new NotImplementedException();
             };
             while (run)
             {
                 string option = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                    .Title("[yellow]Select a [40]query[/] or [/][red]CTR+C to exit.[/]")
+                    .Title("\n[yellow]Select a [40]query.[/][/]")
                     .PageSize(5)
                     .MoreChoicesText("[grey](Move up and down to reveal more options)[/]")
                     .AddChoices(choices)
                     .UseConverter(displaySelector)
                     .HighlightStyle(Style.Plain.Background(Color.Grey))
                 );
-                _ = Enum.TryParse(option, out MenuOptions menuOptions);
+                _ = Enum.TryParse(option, out MenuOptionsEnum menuOptions);
                 run = menuOptions switch
                 {
-                    MenuOptions.AzCliVersion => AzCliVersion.Get(),
-                    MenuOptions.AzAccountShow => AzAccountShow.Get(),
-                    MenuOptions.AzAccountSubscriptionList => AzAccountSubscriptionList.Get(),
-                    MenuOptions.AzResourceGroupList => AzResourceGroupList.Get(),
-                    MenuOptions.About => About.Get(),
-                    MenuOptions.Exit => false,
+                    MenuOptionsEnum.AzCliVersion => AzCliVersion.Get(),
+                    MenuOptionsEnum.AzAccountShow => AzAccountShow.Get(),
+                    MenuOptionsEnum.AzAccountSubscriptionList => AzAccountSubscriptionList.Get(),
+                    MenuOptionsEnum.AzResourceGroupList => AzResourceGroupList.Get(),
+                    MenuOptionsEnum.About => About.Get(),
+                    MenuOptionsEnum.Exit => false,
                     _ => false
                 };
             }

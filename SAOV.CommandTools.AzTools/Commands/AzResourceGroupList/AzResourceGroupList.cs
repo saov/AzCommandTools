@@ -35,7 +35,7 @@
                 var tablePrincipal = new Table()
                     .Border(TableBorder.Square)
                     .BorderColor(Color.Grey)
-                    .AddColumn(new TableColumn(new Markup("[aqua]Az Resource Group List[/]")).Centered())
+                    .AddColumn(new TableColumn(new Markup("[aqua]Azure ResourceGroups[/]")).Centered())
                     .AddRow(tableProperties);
                 AnsiConsole.Write(tablePrincipal);
             }));

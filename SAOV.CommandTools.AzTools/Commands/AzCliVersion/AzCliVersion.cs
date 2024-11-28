@@ -19,7 +19,7 @@
                 AzCliVersionEntity azVersionEntity = JsonHelper.GetEntity<AzCliVersionEntity>(AzHelper.GetAzureInfo(AzCommands.AzVersion));
                 ctx.Spinner(Spinner.Known.Default);
                 ctx.SpinnerStyle(Style.Parse("green bold"));
-                var table1Properties = new Table()
+                var tableProperties = new Table()
                     .Centered()
                     .Border(TableBorder.None)
                     .AddColumn(new TableColumn(string.Empty).LeftAligned())
@@ -30,8 +30,8 @@
                 var tablePrincipal = new Table()
                     .Border(TableBorder.Square)
                     .BorderColor(Color.Grey)
-                    .AddColumn(new TableColumn(new Markup("[aqua]Azure-Cli[/]")).Centered())
-                    .AddRow(table1Properties);
+                    .AddColumn(new TableColumn(new Markup("[aqua]Azure Cli Installed[/]")).Centered())
+                    .AddRow(tableProperties);
                 AnsiConsole.Write(tablePrincipal);
             });
             return true;

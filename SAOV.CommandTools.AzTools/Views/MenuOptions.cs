@@ -2,24 +2,24 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum MenuOptions
+    public enum MenuOptionsEnum
     {
-        [Display(Name = "Az Cli Version")]
+        [Display(Name = "Cli Version Installed")]
         AzCliVersion = 1,
 
-        [Display(Name = "Az Account Show")]
+        [Display(Name = "Show Account Info")]
         AzAccountShow = 2,
 
-        [Display(Name = "Az Account Subscription List")]
+        [Display(Name = "Get Subscriptions")]
         AzAccountSubscriptionList = 3,
 
-        [Display(Name = "AzResourceGroupList")]
+        [Display(Name = "Get ResourceGroups")]
         AzResourceGroupList = 4,
 
-        [Display(Name = "About")]
+        [Display(Name = "About SAOV Azure Tools...")]
         About = 5,
 
-        [Display(Name = "Exit")]
+        [Display(Name = "<< Exit >>")]
         Exit = 6,
     }
 }
