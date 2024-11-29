@@ -4,22 +4,28 @@
 
     public enum MenuOptionsEnum
     {
+        [Display(Name = "Azure Login")]
+        AzLogin = 1,
+
         [Display(Name = "Cli Version Installed")]
-        AzCliVersion = 1,
+        AzCliVersion = 2,
 
         [Display(Name = "Show Account Info")]
-        AzAccountShow = 2,
+        AzAccountShow = 3,
 
         [Display(Name = "Get Subscriptions")]
-        AzAccountSubscriptionList = 3,
+        AzAccountSubscriptionList = 4,
 
         [Display(Name = "Get ResourceGroups")]
-        AzResourceGroupList = 4,
+        AzResourceGroupList = 5,
 
         [Display(Name = "About SAOV Azure Tools...")]
-        About = 5,
+        About = 6,
+
+        [Display(Name = "Azure LogOut")]
+        AzLogOut = 7,
 
         [Display(Name = "<< Exit >>")]
-        Exit = 6,
+        Exit = 8,
     }
 }

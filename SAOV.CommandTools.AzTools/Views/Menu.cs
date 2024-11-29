@@ -3,6 +3,8 @@
     using SAOV.CommandTools.AzTools.Commands.AzAccountShow;
     using SAOV.CommandTools.AzTools.Commands.AzAccountSubscriptionList;
     using SAOV.CommandTools.AzTools.Commands.AzCliVersion;
+    using SAOV.CommandTools.AzTools.Commands.AzLogin;
+    using SAOV.CommandTools.AzTools.Commands.AzLogOut;
     using SAOV.CommandTools.AzTools.Commands.AzResourceGroupList;
     using Spectre.Console;
 
@@ -35,11 +37,13 @@
                 _ = Enum.TryParse(option, out MenuOptionsEnum menuOptions);
                 run = menuOptions switch
                 {
+                    MenuOptionsEnum.AzLogin => AzLogin.Get(),
                     MenuOptionsEnum.AzCliVersion => AzCliVersion.Get(),
                     MenuOptionsEnum.AzAccountShow => AzAccountShow.Get(),
                     MenuOptionsEnum.AzAccountSubscriptionList => AzAccountSubscriptionList.Get(),
                     MenuOptionsEnum.AzResourceGroupList => AzResourceGroupList.Get(),
                     MenuOptionsEnum.About => About.Get(),
+                    MenuOptionsEnum.AzLogOut => AzLogOut.Get(),
                     MenuOptionsEnum.Exit => false,
                     _ => false
                 };

@@ -88,6 +88,24 @@ namespace SAOV.CommandTools.AzTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to az login --service-principal -u @@@User -p @@@Secret --tenant @@@Tenant  --query &quot;[].{id:id, isDefault:isDefault, name:name, state:state}&quot;.
+        /// </summary>
+        internal static string AzLogin {
+            get {
+                return ResourceManager.GetString("AzLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az logout.
+        /// </summary>
+        internal static string AzLogout {
+            get {
+                return ResourceManager.GetString("AzLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to az group list --query &quot;[].{name:name, location:location, provisioningState:properties.provisioningState}&quot;.
         /// </summary>
         internal static string AzResourceGroupList {
