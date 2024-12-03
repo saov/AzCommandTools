@@ -42,7 +42,6 @@
             var tableProperties = new Table()
                 .Centered()
                 .Border(TableBorder.None)
-                .Caption(($"[blue]Total Subscriptions {azAccountSubscriptionListEntity.Length}[/]"))
                 .AddColumn(new TableColumn(string.Empty).LeftAligned())
                 .AddColumn(new TableColumn(string.Empty).LeftAligned())
                 .AddColumn(new TableColumn(string.Empty).LeftAligned());
@@ -54,6 +53,7 @@
             tableProperties.AddEmptyRow();
             var tablePrincipal = new Table()
                 .Border(TableBorder.Square)
+                .Caption(($"[blue]Total Subscriptions {azAccountSubscriptionListEntity.Length}[/]"))
                 .BorderColor(Color.Grey)
                 .AddColumn(new TableColumn(new Markup("[aqua]Azure Subscriptions[/]")).Centered())
                 .AddRow(tableProperties);

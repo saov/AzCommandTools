@@ -8,5 +8,18 @@
         {
             return input.Success ? JsonSerializer.Deserialize<T>(input.Output) : null;
         }
+
+        public static bool IsValidJson(string jsonString)
+        {
+            try
+            {
+                JsonDocument.Parse(jsonString);
+                return true;
+            }
+            catch (JsonException)
+            {
+                return false;
+            }
+        }
     }
 }

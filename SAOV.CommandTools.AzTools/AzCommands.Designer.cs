@@ -88,6 +88,15 @@ namespace SAOV.CommandTools.AzTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to az keyvault list.
+        /// </summary>
+        internal static string AzKeyVaultList {
+            get {
+                return ResourceManager.GetString("AzKeyVaultList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to az login --service-principal -u @@@User -p @@@Secret --tenant @@@Tenant  --query &quot;[].{id:id, isDefault:isDefault, name:name, state:state}&quot;.
         /// </summary>
         internal static string AzLogin {
@@ -111,6 +120,15 @@ namespace SAOV.CommandTools.AzTools {
         internal static string AzResourceGroupList {
             get {
                 return ResourceManager.GetString("AzResourceGroupList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az resource list --resource-group @@@ --query &quot;[].{name:name, location:location, provisioningState:provisioningState, type:type}&quot;.
+        /// </summary>
+        internal static string AzResourceGroupResources {
+            get {
+                return ResourceManager.GetString("AzResourceGroupResources", resourceCulture);
             }
         }
         

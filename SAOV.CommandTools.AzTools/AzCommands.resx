@@ -126,6 +126,9 @@
   <data name="AzAccountSubscriptionList" xml:space="preserve">
     <value>az account subscription list --query "[].{displayName:displayName, state:state, subscriptionId:subscriptionId}"</value>
   </data>
+  <data name="AzKeyVaultList" xml:space="preserve">
+    <value>az keyvault list</value>
+  </data>
   <data name="AzLogin" xml:space="preserve">
     <value>az login --service-principal -u @@@User -p @@@Secret --tenant @@@Tenant  --query "[].{id:id, isDefault:isDefault, name:name, state:state}"</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="AzResourceGroupList" xml:space="preserve">
     <value>az group list --query "[].{name:name, location:location, provisioningState:properties.provisioningState}"</value>
+  </data>
+  <data name="AzResourceGroupResources" xml:space="preserve">
+    <value>az resource list --resource-group @@@ --query "[].{name:name, location:location, provisioningState:provisioningState, type:type}"</value>
   </data>
   <data name="AzVersion" xml:space="preserve">
     <value>az version</value>

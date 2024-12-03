@@ -19,13 +19,16 @@
         [Display(Name = "Get ResourceGroups")]
         AzResourceGroupList = 5,
 
+        [Display(Name = "Get KeyVaults")]
+        AzKeyVaultList = 6,
+
         [Display(Name = "About SAOV Azure Tools...")]
-        About = 6,
+        About = 7,
 
         [Display(Name = "Azure LogOut")]
-        AzLogOut = 7,
+        AzLogOut = 8,
 
         [Display(Name = "<< Exit >>")]
-        Exit = 8,
+        Exit = 9,
     }
 }
