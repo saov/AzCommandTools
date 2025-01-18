@@ -49,7 +49,6 @@
             .Centered()
             .Border(TableBorder.Square)
             .BorderColor(Color.Grey)
-            .Caption(($"[blue]Total Subscriptions {azLoginEntity.Length}[/]"))
             .AddColumn(new TableColumn("Name").LeftAligned())
             .AddColumn(new TableColumn("Id").Centered())
             .AddColumn(new TableColumn("State").Centered())
@@ -63,6 +62,7 @@
         tableProperties.AddEmptyRow();
             Table tablePrincipal = new Table()
             .Border(TableBorder.Square)
+            .Caption(($"[blue]Total Subscriptions {azLoginEntity.Length}[/]"))
             .BorderColor(Color.Grey)
             .AddColumn(new TableColumn(new Markup("[aqua]Azure Subscriptions[/]")).Centered())
             .AddRow(tableProperties);

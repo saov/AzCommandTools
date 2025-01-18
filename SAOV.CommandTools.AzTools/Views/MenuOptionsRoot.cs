@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum MenuOptionsEnum
+    public enum MenuOptionsRoot
     {
         [Display(Name = "Azure Login")]
         AzLogin = 1,

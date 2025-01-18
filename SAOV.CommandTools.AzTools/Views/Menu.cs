@@ -15,10 +15,10 @@
         {
             List<string> choices = [];
             bool run = true;
-            Enum.GetValues<MenuOptionsEnum>().ToList().ForEach(item => { choices.Add(item.ToString()); });
+            Enum.GetValues<MenuOptionsRoot>().ToList().ForEach(item => { choices.Add(item.ToString()); });
             Func<string, string> displaySelector = str =>
             {
-                if (Enum.TryParse(str, out MenuOptionsEnum menuOptions))
+                if (Enum.TryParse(str, out MenuOptionsRoot menuOptions))
                 {
                     return $"[93]{menuOptions.ToName()}[/]";
                 }
@@ -36,18 +36,18 @@
                     .HighlightStyle(Style.Plain.Background(Color.Grey))
                     .EnableSearch()
                 );
-                _ = Enum.TryParse(option, out MenuOptionsEnum menuOptions);
+                _ = Enum.TryParse(option, out MenuOptionsRoot menuOptions);
                 run = menuOptions switch
                 {
-                    MenuOptionsEnum.AzLogin => AzLogin.Get(),
-                    MenuOptionsEnum.AzCliVersion => AzCliVersion.Get(),
-                    MenuOptionsEnum.AzAccountShow => AzAccountShow.Get(),
-                    MenuOptionsEnum.AzAccountSubscriptionList => AzAccountSubscriptionList.Get(),
-                    MenuOptionsEnum.AzResourceGroupList => AzResourceGroupList.Get(),
-                    MenuOptionsEnum.AzKeyVaultList => AzKeyVaultList.Get(),
-                    MenuOptionsEnum.About => About.Get(),
-                    MenuOptionsEnum.AzLogOut => AzLogOut.Get(),
-                    MenuOptionsEnum.Exit => false,
+                    //MenuOptionsRoot.AzLogin => AzLogin.Get(),
+                    //MenuOptionsRoot.AzCliVersion => AzCliVersion.Get(),
+                    //MenuOptionsRoot.AzAccountShow => AzAccountShow.Get(),
+                    //MenuOptionsRoot.AzAccountSubscriptionList => AzAccountSubscriptionList.Get(),
+                    //MenuOptionsRoot.AzResourceGroupList => AzResourceGroupList.Get(),
+                    //MenuOptionsRoot.AzKeyVaultList => AzKeyVaultList.Get(),
+                    //MenuOptionsRoot.About => About.Get(),
+                    //MenuOptionsRoot.AzLogOut => AzLogOut.Get(),
+                    MenuOptionsRoot.Exit => false,
                     _ => false
                 };
             }

@@ -117,43 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountShow" xml:space="preserve">
-    <value>az account show --query "{id:id, name:name, state:state, tenantDisplayName:tenantDisplayName, tenantId:tenantId, userName:user.name, userType:user.type}"</value>
-  </data>
-  <data name="AzAccountSetSubscription" xml:space="preserve">
-    <value>az account set --subscription @@@</value>
-  </data>
-  <data name="AzAccountSubscriptionList" xml:space="preserve">
-    <value>az account subscription list --query "[].{displayName:displayName, state:state, subscriptionId:subscriptionId}"</value>
-  </data>
-  <data name="AzGetKeyVaultSecretValue" xml:space="preserve">
-    <value>az keyvault secret show --vault-name @@@KeyVault --name @@@SecretName --query "value"</value>
-  </data>
-  <data name="AzKeyVaultList" xml:space="preserve">
-    <value>az keyvault list --query "[].{name:name, resourceGroup:resourceGroup, location:location}"</value>
-  </data>
-  <data name="AzKeyVaultSecretsList" xml:space="preserve">
-    <value>az keyvault secret list --vault-name @@@ --query "[].{name:name, enabled:attributes.enabled}"</value>
-  </data>
-  <data name="AzLogin" xml:space="preserve">
+  <data name="Account-Login" xml:space="preserve">
     <value>az login --service-principal -u @@@User -p @@@Secret --tenant @@@Tenant  --query "[].{id:id, isDefault:isDefault, name:name, state:state}"</value>
   </data>
-  <data name="AzLogout" xml:space="preserve">
+  <data name="Account-Logout" xml:space="preserve">
     <value>az logout</value>
-  </data>
-  <data name="AzResourceGroupList" xml:space="preserve">
-    <value>az group list --query "[].{name:name, location:location, provisioningState:properties.provisioningState}"</value>
-  </data>
-  <data name="AzResourceGroupResources" xml:space="preserve">
-    <value>az resource list --resource-group @@@ --query "[].{name:name, location:location, provisioningState:provisioningState, type:type}"</value>
-  </data>
-  <data name="AzVersion" xml:space="preserve">
-    <value>az version</value>
-  </data>
-  <data name="ClearScreenLinux" xml:space="preserve">
-    <value>clear</value>
-  </data>
-  <data name="ClearScreenWindows" xml:space="preserve">
-    <value>cls</value>
   </data>
 </root>

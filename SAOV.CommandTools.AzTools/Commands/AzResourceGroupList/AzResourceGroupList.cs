@@ -18,16 +18,27 @@
                 }));
             if (azResourceGroupListEntity != null)
             {
+                bool run = true;
                 Map(azResourceGroupListEntity);
-                var confirmation = AnsiConsole.Prompt(
-                    new TextPrompt<bool>("Do you want to get Resources?")
-                    .AddChoice(true)
-                    .AddChoice(false)
-                    .DefaultValue(false)
-                    .WithConverter(choice => choice ? "y" : "n"));
-                if (confirmation)
+                if (azResourceGroupListEntity.Length > 0)
                 {
-                    GetResources(azResourceGroupListEntity);
+                    while (run)
+                    {
+                        bool confirmation = AnsiConsole.Prompt(
+                            new TextPrompt<bool>("Do you want to obtain Resources from the Resource Group?")
+                            .AddChoice(true)
+                            .AddChoice(false)
+                            .DefaultValue(false)
+                            .WithConverter(choice => choice ? "y" : "n"));
+                        if (confirmation)
+                        {
+                            GetResources(azResourceGroupListEntity);
+                        }
+                        else
+                        {
+                            run = false;
+                        }
+                    }
                 }
                 return true;
             }

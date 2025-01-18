@@ -88,11 +88,29 @@ namespace SAOV.CommandTools.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az keyvault list.
+        ///   Looks up a localized string similar to az keyvault secret show --vault-name @@@KeyVault --name @@@SecretName --query &quot;value&quot;.
+        /// </summary>
+        internal static string AzGetKeyVaultSecretValue {
+            get {
+                return ResourceManager.GetString("AzGetKeyVaultSecretValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az keyvault list --query &quot;[].{name:name, resourceGroup:resourceGroup, location:location}&quot;.
         /// </summary>
         internal static string AzKeyVaultList {
             get {
                 return ResourceManager.GetString("AzKeyVaultList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az keyvault secret list --vault-name @@@ --query &quot;[].{name:name, enabled:attributes.enabled}&quot;.
+        /// </summary>
+        internal static string AzKeyVaultSecretsList {
+            get {
+                return ResourceManager.GetString("AzKeyVaultSecretsList", resourceCulture);
             }
         }
         
