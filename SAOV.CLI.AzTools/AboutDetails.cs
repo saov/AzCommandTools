@@ -1,7 +1,7 @@
-﻿using Spectre.Console;
-
-namespace SAOV.CLI.AzTools
+﻿namespace SAOV.CLI.AzTools
 {
+    using Spectre.Console;
+
     internal static class AboutDetails
     {
         internal static Table Get(TableBorder tableBorder, TableColumn tableColumn, bool isHeader)

@@ -1,14 +1,14 @@
-﻿using SAOV.CLI.AzTools.Enums;
-using SAOV.CLI.AzTools.Helpers;
-using SAOV.CLI.AzTools.Modules.Account;
-using SAOV.CLI.AzTools.Modules.AzureCli;
-using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
-using SAOV.CLI.AzTools.Modules.ResourceGroup;
-using Spectre.Console;
-using System.Text;
-
-namespace SAOV.CLI.AzTools
+﻿namespace SAOV.CLI.AzTools
 {
+    using SAOV.CLI.AzTools.Helpers;
+    using SAOV.CLI.AzTools.Menus;
+    using SAOV.CLI.AzTools.Modules.Account;
+    using SAOV.CLI.AzTools.Modules.AzureCli;
+    using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
+    using SAOV.CLI.AzTools.Modules.ResourceGroup;
+    using Spectre.Console;
+    using System.Text;
+
     internal class Program
     {
         static void Main(string[] args)

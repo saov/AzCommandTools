@@ -1,7 +1,7 @@
-﻿using Spectre.Console;
-
-namespace SAOV.CLI.AzTools.Components
+﻿namespace SAOV.CLI.AzTools.Components
 {
+    using Spectre.Console;
+
     internal static class Status
     {
         internal static T Show<T>(string message, Func<T> function)

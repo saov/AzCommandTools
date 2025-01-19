@@ -1,11 +1,11 @@
-﻿using SAOV.CLI.AzTools.Components;
-using SAOV.CLI.AzTools.Helpers;
-using SAOV.CLI.AzTools.Menus;
-using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
-using Spectre.Console;
-
-namespace SAOV.CLI.AzTools.Modules.AzureCli
+﻿namespace SAOV.CLI.AzTools.Modules.AzureCli
 {
+    using SAOV.CLI.AzTools.Components;
+    using SAOV.CLI.AzTools.Helpers;
+    using SAOV.CLI.AzTools.Menus;
+    using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
+    using Spectre.Console;
+
     internal static class AzureCli
     {
         public static bool Show()

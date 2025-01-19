@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SAOV.CLI.AzTools.Menus
+﻿namespace SAOV.CLI.AzTools.Menus
 {
+    using System.ComponentModel.DataAnnotations;
+
     public enum AccountMenu
     {
         [Display(Name = "LogIn")]

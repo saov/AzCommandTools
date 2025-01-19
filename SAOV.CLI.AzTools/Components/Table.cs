@@ -1,7 +1,7 @@
-﻿using Spectre.Console;
-
-namespace SAOV.CLI.AzTools.Components
+﻿namespace SAOV.CLI.AzTools.Components
 {
+    using Spectre.Console;
+
     internal static class Table
     {
         internal static Spectre.Console.Table Show(bool tableBorder, string title, string caption, List<KeyValuePair<Markup, Justify>> columns, List<List<Markup>> rows, bool expand = false)

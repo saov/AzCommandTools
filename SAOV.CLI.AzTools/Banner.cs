@@ -1,9 +1,9 @@
-﻿using SAOV.CLI.AzTools.Helpers;
-using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
-using Spectre.Console;
-
-namespace SAOV.CLI.AzTools
+﻿namespace SAOV.CLI.AzTools
 {
+    using SAOV.CLI.AzTools.Helpers;
+    using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
+    using Spectre.Console;
+
     internal static class Banner
     {
         internal static void Show()
@@ -12,11 +12,11 @@ namespace SAOV.CLI.AzTools
             Table tableAzCli = new Table()
                 .Centered()
                 .Border(TableBorder.None)
-                .AddColumn(new TableColumn(string.Empty).LeftAligned())
                 .AddColumn(new TableColumn(string.Empty).RightAligned())
-                .AddRow(new Markup("[93]Az Cli[/]").LeftJustified(), new Markup($"[40]{azVersionEntity.AzureCli}[/]").Centered())
-                .AddRow(new Markup("[93]Az Core[/]").LeftJustified(), new Markup($"[40]{azVersionEntity.AzureCliCore}[/]").Centered())
-                .AddRow(new Markup("[93]Az Telemetry[/]").LeftJustified(), new Markup($"[40]{azVersionEntity.AzureCliTelemetry}[/]").Centered());
+                .AddColumn(new TableColumn(string.Empty).LeftAligned())
+                .AddRow(new Markup("[93]Az-Cli :[/]"), new Markup($"[40]{azVersionEntity.AzureCli}[/]"))
+                .AddRow(new Markup("[93]Az-Core :[/]"), new Markup($"[40]{azVersionEntity.AzureCliCore}[/]"))
+                .AddRow(new Markup("[93]Az-Telemetry :[/]"), new Markup($"[40]{azVersionEntity.AzureCliTelemetry}[/]"));
             Table tableInfo = new Table()
                .Border(TableBorder.None)
                .AddColumn(string.Empty)

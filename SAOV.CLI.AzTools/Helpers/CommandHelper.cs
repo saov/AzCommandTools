@@ -1,8 +1,8 @@
-﻿using Spectre.Console;
-using System.Text.Json;
-
-namespace SAOV.CLI.AzTools.Helpers
+﻿namespace SAOV.CLI.AzTools.Helpers
 {
+    using Spectre.Console;
+    using System.Text.Json;
+
     internal static class CommandHelper
     {
         internal static T Run<T>(string command, Dictionary<string, string> paramentersCommand)

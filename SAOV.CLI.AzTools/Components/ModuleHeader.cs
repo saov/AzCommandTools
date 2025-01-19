@@ -1,7 +1,7 @@
-﻿using Spectre.Console;
-
-namespace SAOV.CLI.AzTools.Components
+﻿namespace SAOV.CLI.AzTools.Components
 {
+    using Spectre.Console;
+
     internal static class ModuleHeader
     {
         internal static void Show(string path)

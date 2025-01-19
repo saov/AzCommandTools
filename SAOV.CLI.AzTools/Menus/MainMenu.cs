@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SAOV.CLI.AzTools.Enums
+﻿namespace SAOV.CLI.AzTools.Menus
 {
+    using System.ComponentModel.DataAnnotations;
+
     public enum MainMenu
     {
         [Display(Name = "Az Cli")]

@@ -1,11 +1,11 @@
-﻿using SAOV.CLI.AzTools.Components;
-using SAOV.CLI.AzTools.Helpers;
-using SAOV.CLI.AzTools.Menus;
-using SAOV.CLI.AzTools.Modules.ResourceGroup.Entities;
-using Spectre.Console;
-
-namespace SAOV.CLI.AzTools.Modules.ResourceGroup
+﻿namespace SAOV.CLI.AzTools.Modules.ResourceGroup
 {
+    using SAOV.CLI.AzTools.Components;
+    using SAOV.CLI.AzTools.Helpers;
+    using SAOV.CLI.AzTools.Menus;
+    using SAOV.CLI.AzTools.Modules.ResourceGroup.Entities;
+    using Spectre.Console;
+
     internal static class ResourceGroup
     {
         public static bool Show()

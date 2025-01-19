@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
-namespace SAOV.CLI.AzTools.Modules.ResourceGroup.Entities
+﻿namespace SAOV.CLI.AzTools.Modules.ResourceGroup.Entities
 {
+    using System.Text.Json.Serialization;
+
     internal class AzResourceGroupListEntity
     {
         [JsonPropertyName("location")]

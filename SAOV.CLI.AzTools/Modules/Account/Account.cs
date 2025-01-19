@@ -1,11 +1,11 @@
-﻿using SAOV.CLI.AzTools.Components;
-using SAOV.CLI.AzTools.Helpers;
-using SAOV.CLI.AzTools.Menus;
-using SAOV.CLI.AzTools.Modules.Account.Entities;
-using Spectre.Console;
-
-namespace SAOV.CLI.AzTools.Modules.Account
+﻿namespace SAOV.CLI.AzTools.Modules.Account
 {
+    using SAOV.CLI.AzTools.Components;
+    using SAOV.CLI.AzTools.Helpers;
+    using SAOV.CLI.AzTools.Menus;
+    using SAOV.CLI.AzTools.Modules.Account.Entities;
+    using Spectre.Console;
+
     internal class Account
     {
         public static bool Show()
