@@ -39,14 +39,14 @@
                 _ = Enum.TryParse(option, out MenuOptionsRoot menuOptions);
                 run = menuOptions switch
                 {
-                    //MenuOptionsRoot.AzLogin => AzLogin.Get(),
-                    //MenuOptionsRoot.AzCliVersion => AzCliVersion.Get(),
-                    //MenuOptionsRoot.AzAccountShow => AzAccountShow.Get(),
-                    //MenuOptionsRoot.AzAccountSubscriptionList => AzAccountSubscriptionList.Get(),
-                    //MenuOptionsRoot.AzResourceGroupList => AzResourceGroupList.Get(),
-                    //MenuOptionsRoot.AzKeyVaultList => AzKeyVaultList.Get(),
-                    //MenuOptionsRoot.About => About.Get(),
-                    //MenuOptionsRoot.AzLogOut => AzLogOut.Get(),
+                    MenuOptionsRoot.AzLogin => AzLogin.Get(),
+                    MenuOptionsRoot.AzCliVersion => AzCliVersion.Get(),
+                    MenuOptionsRoot.AzAccountShow => AzAccountShow.Get(),
+                    MenuOptionsRoot.AzAccountSubscriptionList => AzAccountSubscriptionList.Get(),
+                    MenuOptionsRoot.AzResourceGroupList => AzResourceGroupList.Get(),
+                    MenuOptionsRoot.AzKeyVaultList => AzKeyVaultList.Get(),
+                    MenuOptionsRoot.About => About.Get(),
+                    MenuOptionsRoot.AzLogOut => AzLogOut.Get(),
                     MenuOptionsRoot.Exit => false,
                     _ => false
                 };

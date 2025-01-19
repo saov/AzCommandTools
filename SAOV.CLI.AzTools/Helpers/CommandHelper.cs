@@ -16,7 +16,6 @@ namespace SAOV.CLI.AzTools.Helpers
             {
                 if (!string.IsNullOrWhiteSpace(Output))
                 {
-                    AnsiConsole.WriteLine();
                     return JsonSerializer.Deserialize<T>(Output);
                 }
             }

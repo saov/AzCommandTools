@@ -28,7 +28,7 @@
         [Display(Name = "Azure LogOut")]
         AzLogOut = 8,
 
-        [Display(Name = "<< Exit >>")]
+        [Display(Name = "Exit")]
         Exit = 9,
     }
 }

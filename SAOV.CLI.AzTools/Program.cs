@@ -1,5 +1,9 @@
 ﻿using SAOV.CLI.AzTools.Enums;
+using SAOV.CLI.AzTools.Helpers;
 using SAOV.CLI.AzTools.Modules.Account;
+using SAOV.CLI.AzTools.Modules.AzureCli;
+using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
+using SAOV.CLI.AzTools.Modules.ResourceGroup;
 using Spectre.Console;
 using System.Text;
 
@@ -13,23 +17,29 @@ namespace SAOV.CLI.AzTools
             Console.OutputEncoding = Encoding.UTF8;
             //DemoComponents();
 
-            List<string> choices = [];
-            bool run = true;
-            Enum.GetValues<MainMenu>().ToList().ForEach(item => { choices.Add(item.ToString()); });
-            while (run)
+            AzCliVersionEntity azVersionEntity = CommandHelper.Run<AzCliVersionEntity>(AzCommands.AzureCli_Version, []);
+            if (azVersionEntity != null)
             {
-                AnsiConsole.Clear();
-                Banner.Show();
-                string selectionPromptValue = Components.SelectionPrompt.Show(choices);
-                _ = Enum.TryParse(selectionPromptValue, out MainMenu mainMenuOption);
-                run = mainMenuOption switch
+                List<string> choices = [];
+                bool run = true;
+                Enum.GetValues<MainMenu>().ToList().ForEach(item => { choices.Add(item.ToString()); });
+                while (run)
                 {
-                    MainMenu.Account => Account.Show(),
-                    MainMenu.Exit => false,
-                    _ => false
-                };
+                    AnsiConsole.Clear();
+                    Banner.Show();
+                    string selectionPromptValue = Components.SelectionPrompt.Show(choices);
+                    _ = Enum.TryParse(selectionPromptValue, out MainMenu mainMenuOption);
+                    run = mainMenuOption switch
+                    {
+                        MainMenu.AzureCli => AzureCli.Show(),
+                        MainMenu.Account => Account.Show(),
+                        MainMenu.ResourceGroup => ResourceGroup.Show(),
+                        MainMenu.Exit => false,
+                        _ => false
+                    };
+                }
+                Console.Clear();
             }
-            Console.Clear();
         }
 
         #region Demo DemoComponents
@@ -66,7 +76,8 @@ namespace SAOV.CLI.AzTools
                           new($"[purple]{item.MyProperty03}[/]"),
                           new($"[40]{item.MyProperty04}[/]")]);
             });
-            Components.Table.Show("My Caption", columns, rows);
+            AnsiConsole.Write(Components.Table.Show(true, "My Title", "My Caption", columns, rows));
+            AnsiConsole.WriteLine();
         }
 
         static List<MyClass> GetEntities()

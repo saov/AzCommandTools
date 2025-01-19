@@ -77,5 +77,113 @@ namespace SAOV.CLI.AzTools {
                 return ResourceManager.GetString("Account-Logout", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az account set --subscription @@@SubscriptionId.
+        /// </summary>
+        internal static string Account_SetSubscription {
+            get {
+                return ResourceManager.GetString("Account-SetSubscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az account show --query &quot;{id:id, name:name, state:state, tenantDisplayName:tenantDisplayName, tenantId:tenantId, userName:user.name, userType:user.type}&quot;.
+        /// </summary>
+        internal static string Account_Show {
+            get {
+                return ResourceManager.GetString("Account-Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az account subscription list --query &quot;[].{displayName:displayName, state:state, subscriptionId:subscriptionId}&quot;.
+        /// </summary>
+        internal static string Account_SubscriptionList {
+            get {
+                return ResourceManager.GetString("Account-SubscriptionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az extension add --name @@@ExtensionName.
+        /// </summary>
+        internal static string AzureCli_ExtensionAdd {
+            get {
+                return ResourceManager.GetString("AzureCli-ExtensionAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az extension remove --name @@@ExtensionName.
+        /// </summary>
+        internal static string AzureCli_ExtensionRemove {
+            get {
+                return ResourceManager.GetString("AzureCli-ExtensionRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az extension list-available --query &quot;[].{name:name, summary:summary, version:version}&quot;.
+        /// </summary>
+        internal static string AzureCli_ExtensionsAvailableList {
+            get {
+                return ResourceManager.GetString("AzureCli-ExtensionsAvailableList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az extension list --query &quot;[].{name:name, summary:summary, version:version}&quot;.
+        /// </summary>
+        internal static string AzureCli_ExtensionsInstalledList {
+            get {
+                return ResourceManager.GetString("AzureCli-ExtensionsInstalledList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az extension update --name @@@ExtensionName.
+        /// </summary>
+        internal static string AzureCli_ExtensionUpdate {
+            get {
+                return ResourceManager.GetString("AzureCli-ExtensionUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az upgrade --yes.
+        /// </summary>
+        internal static string AzureCli_Upgrade {
+            get {
+                return ResourceManager.GetString("AzureCli-Upgrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az version.
+        /// </summary>
+        internal static string AzureCli_Version {
+            get {
+                return ResourceManager.GetString("AzureCli-Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az group list --query &quot;[].{name:name, location:location, provisioningState:properties.provisioningState}&quot;.
+        /// </summary>
+        internal static string ResourceGroup_List {
+            get {
+                return ResourceManager.GetString("ResourceGroup-List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az resource list --resource-group @@@ResourceGroup --query &quot;[].{name:name, location:location, provisioningState:provisioningState, type:type}&quot;.
+        /// </summary>
+        internal static string ResourceGroup_ResourcesList {
+            get {
+                return ResourceManager.GetString("ResourceGroup-ResourcesList", resourceCulture);
+            }
+        }
     }
 }

@@ -4,11 +4,12 @@ namespace SAOV.CLI.AzTools.Components
 {
     internal static class Table
     {
-        internal static void Show(string caption, List<KeyValuePair<Markup, Justify>> columns, List<List<Markup>> rows, bool expand = false)
+        internal static Spectre.Console.Table Show(bool tableBorder, string title, string caption, List<KeyValuePair<Markup, Justify>> columns, List<List<Markup>> rows, bool expand = false)
         {
             Spectre.Console.Table table = new Spectre.Console.Table()
-              .Border(TableBorder.Square)
-              .Title(($"[blue]{caption}[/]"))
+              .Border(tableBorder ? TableBorder.Square : TableBorder.None)
+              .Title($"{title}")
+              .Caption($"{caption}")
               .BorderColor(Color.Grey);
             columns.ForEach(column =>
             {
@@ -22,8 +23,7 @@ namespace SAOV.CLI.AzTools.Components
             {
                 table.Expand();
             }
-            AnsiConsole.Write(table);
-            AnsiConsole.WriteLine();
+            return table;
         }
     }
 }

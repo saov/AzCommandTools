@@ -9,7 +9,7 @@
             using Process process = new();
             process.StartInfo = GetProcessStartInfo(command);
             process.Start();
-            process.WaitForExit();
+            process.WaitForExit(10000);
             string output = process.StandardOutput.ReadToEnd();
             if (process.ExitCode != 0)
             {

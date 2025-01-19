@@ -123,4 +123,40 @@
   <data name="Account-Logout" xml:space="preserve">
     <value>az logout</value>
   </data>
+  <data name="Account-SetSubscription" xml:space="preserve">
+    <value>az account set --subscription @@@SubscriptionId</value>
+  </data>
+  <data name="Account-Show" xml:space="preserve">
+    <value>az account show --query "{id:id, name:name, state:state, tenantDisplayName:tenantDisplayName, tenantId:tenantId, userName:user.name, userType:user.type}"</value>
+  </data>
+  <data name="Account-SubscriptionList" xml:space="preserve">
+    <value>az account subscription list --query "[].{displayName:displayName, state:state, subscriptionId:subscriptionId}"</value>
+  </data>
+  <data name="AzureCli-ExtensionAdd" xml:space="preserve">
+    <value>az extension add --name @@@ExtensionName</value>
+  </data>
+  <data name="AzureCli-ExtensionRemove" xml:space="preserve">
+    <value>az extension remove --name @@@ExtensionName</value>
+  </data>
+  <data name="AzureCli-ExtensionsAvailableList" xml:space="preserve">
+    <value>az extension list-available --query "[].{name:name, summary:summary, version:version}"</value>
+  </data>
+  <data name="AzureCli-ExtensionsInstalledList" xml:space="preserve">
+    <value>az extension list --query "[].{name:name, summary:summary, version:version}"</value>
+  </data>
+  <data name="AzureCli-ExtensionUpdate" xml:space="preserve">
+    <value>az extension update --name @@@ExtensionName</value>
+  </data>
+  <data name="AzureCli-Upgrade" xml:space="preserve">
+    <value>az upgrade --yes</value>
+  </data>
+  <data name="AzureCli-Version" xml:space="preserve">
+    <value>az version</value>
+  </data>
+  <data name="ResourceGroup-List" xml:space="preserve">
+    <value>az group list --query "[].{name:name, location:location, provisioningState:properties.provisioningState}"</value>
+  </data>
+  <data name="ResourceGroup-ResourcesList" xml:space="preserve">
+    <value>az resource list --resource-group @@@ResourceGroup --query "[].{name:name, location:location, provisioningState:provisioningState, type:type}"</value>
+  </data>
 </root>
