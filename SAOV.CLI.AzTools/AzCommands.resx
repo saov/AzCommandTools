@@ -153,6 +153,18 @@
   <data name="AzureCli-Version" xml:space="preserve">
     <value>az version</value>
   </data>
+  <data name="KeyVault-List" xml:space="preserve">
+    <value>az keyvault list --query "[].{name:name, resourceGroup:resourceGroup, location:location}"</value>
+  </data>
+  <data name="KeyVault-NetworkRule" xml:space="preserve">
+    <value>az keyvault network-rule list --resource-group @@@ResourceGroup --name @@@KeyVault</value>
+  </data>
+  <data name="KeyVault-SecretList" xml:space="preserve">
+    <value>az keyvault secret list --vault-name @@@KeyVault</value>
+  </data>
+  <data name="KeyVault-SecretShow" xml:space="preserve">
+    <value>az keyvault secret show --vault-name @@@KeyVault --name @@@SecretName --query "{name:name, value:value}"</value>
+  </data>
   <data name="ResourceGroup-List" xml:space="preserve">
     <value>az group list --query "[].{name:name, location:location, provisioningState:properties.provisioningState}"</value>
   </data>

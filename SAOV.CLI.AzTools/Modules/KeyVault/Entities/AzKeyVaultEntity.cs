@@ -1,4 +1,4 @@
-﻿namespace SAOV.CommandTools.AzTools.Commands.AzKeyVault
+﻿namespace SAOV.CLI.AzTools.Modules.KeyVault.Entities
 {
     using System.Text.Json.Serialization;
 
@@ -12,5 +12,11 @@
 
         [JsonPropertyName("location")]
         public string? Location { get; set; }
+
+        [JsonPropertyName("bypass")]
+        public string? Bypass { get; set; }
+
+        [JsonPropertyName("defaultAction")]
+        public string? DefaultAction { get; set; }
     }
 }

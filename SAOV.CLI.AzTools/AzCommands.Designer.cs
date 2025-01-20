@@ -169,6 +169,42 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to az keyvault list --query &quot;[].{name:name, resourceGroup:resourceGroup, location:location}&quot;.
+        /// </summary>
+        internal static string KeyVault_List {
+            get {
+                return ResourceManager.GetString("KeyVault-List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az keyvault network-rule list --resource-group @@@ResourceGroup --name @@@KeyVault.
+        /// </summary>
+        internal static string KeyVault_NetworkRule {
+            get {
+                return ResourceManager.GetString("KeyVault-NetworkRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az keyvault secret list --vault-name @@@KeyVault.
+        /// </summary>
+        internal static string KeyVault_SecretList {
+            get {
+                return ResourceManager.GetString("KeyVault-SecretList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az keyvault secret show --vault-name @@@KeyVault --name @@@SecretName --query &quot;{name:name, value:value}&quot;.
+        /// </summary>
+        internal static string KeyVault_SecretShow {
+            get {
+                return ResourceManager.GetString("KeyVault-SecretShow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to az group list --query &quot;[].{name:name, location:location, provisioningState:properties.provisioningState}&quot;.
         /// </summary>
         internal static string ResourceGroup_List {

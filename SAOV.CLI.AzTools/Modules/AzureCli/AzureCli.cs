@@ -15,7 +15,7 @@
             Enum.GetValues<AzureCliMenu>().ToList().ForEach(item => { choices.Add(item.ToString()); });
             while (!run)
             {
-                ModuleHeader.Show("/Account");
+                ModuleHeader.Show("/AzureCli");
                 string selectionPromptValue = SelectionPrompt.Show(choices);
                 _ = Enum.TryParse(selectionPromptValue, out AzureCliMenu azMenu);
                 run = azMenu switch

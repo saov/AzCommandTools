@@ -13,6 +13,9 @@
         [Display(Name = "ResourceGroup")]
         ResourceGroup = 3,
 
+        [Display(Name = "KeyVault")]
+        KeyVault = 4,
+
         [Display(Name = "Exit")]
         Exit = 99,
     }

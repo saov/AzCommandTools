@@ -15,7 +15,7 @@
             Enum.GetValues<ResourceGroupMenu>().ToList().ForEach(item => { choices.Add(item.ToString()); });
             while (!run)
             {
-                ModuleHeader.Show("/Account");
+                ModuleHeader.Show("/ResourceGroup");
                 string selectionPromptValue = SelectionPrompt.Show(choices);
                 _ = Enum.TryParse(selectionPromptValue, out ResourceGroupMenu azMenu);
                 run = azMenu switch

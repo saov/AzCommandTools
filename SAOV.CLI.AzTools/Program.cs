@@ -5,6 +5,7 @@
     using SAOV.CLI.AzTools.Modules.Account;
     using SAOV.CLI.AzTools.Modules.AzureCli;
     using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
+    using SAOV.CLI.AzTools.Modules.KeyVault;
     using SAOV.CLI.AzTools.Modules.ResourceGroup;
     using Spectre.Console;
     using System.Text;
@@ -34,6 +35,7 @@
                         MainMenu.AzureCli => AzureCli.Show(),
                         MainMenu.Account => Account.Show(),
                         MainMenu.ResourceGroup => ResourceGroup.Show(),
+                        MainMenu.KeyVault => KeyVault.Show(),
                         MainMenu.Exit => false,
                         _ => false
                     };
