@@ -40,7 +40,7 @@
                 List<KeyValuePair<Markup, Justify>> columns =
                 [
                     new(new("Name"), Justify.Left),
-                    new(new("ResourceGroup"), Justify.Center),
+                    new(new("ResourceGroup"), Justify.Left),
                     new(new("Location"), Justify.Center)
                 ];
                 List<List<Markup>> rows = [];
@@ -74,7 +74,7 @@
                 List<KeyValuePair<Markup, Justify>> columns =
                 [
                     new(new("Name"), Justify.Left),
-                    new(new("ResourceGroup"), Justify.Center),
+                    new(new("ResourceGroup"), Justify.Left),
                     new(new("Bypass"), Justify.Center),
                     new(new("DefaultAction"), Justify.Center),
                     new(new("Location"), Justify.Center)
@@ -98,7 +98,7 @@
             AzKeyVaultEntity[] azKeyVaultEntity = GetKeyVaultListData();
             List<string> choices = [];
             azKeyVaultEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
-            choices.Add($"[93](x) ([yellow]Cancel[/])[/]");
+            choices.Add($"[93](x) [yellow]Cancel[/][/]");
             if (azKeyVaultEntity != null)
             {
                 bool showChoises = true;
@@ -107,7 +107,7 @@
                     AnsiConsole.Clear();
                     ModuleHeader.Show("/KeyVault/GetKeyVaulSecretList");
                     string keyvault = SelectionPrompt.Show(choices);
-                    if (keyvault == "[93](x) ([yellow]Cancel[/])[/]")
+                    if (keyvault == "[93](x) [yellow]Cancel[/][/]")
                     {
                         showChoises = false;
                         return true;
@@ -145,7 +145,7 @@
             AzKeyVaultEntity[] azKeyVaultEntity = GetKeyVaultListData();
             List<string> choices = [];
             azKeyVaultEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
-            choices.Add($"[93](x) ([yellow]Cancel[/])[/]");
+            choices.Add($"[93](x) [yellow]Cancel[/][/]");
             if (azKeyVaultEntity != null)
             {
                 bool showChoises = true;
@@ -154,7 +154,7 @@
                     AnsiConsole.Clear();
                     ModuleHeader.Show("/KeyVault/KeyVaultSecretShow");
                     string keyvault = SelectionPrompt.Show(choices);
-                    if (keyvault == "[93](x) ([yellow]Cancel[/])[/]")
+                    if (keyvault == "[93](x) [yellow]Cancel[/][/]")
                     {
                         showChoises = false;
                         return true;
@@ -170,14 +170,14 @@
                     {
                         List<string> choicestKeyVaulSecret = [];
                         azKeyVaultSecretEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choicestKeyVaulSecret.Add($"{item.Name}"); });
-                        choicestKeyVaulSecret.Add($"[93](x) ([yellow]Cancel[/])[/]");
+                        choicestKeyVaulSecret.Add($"[93](x) [yellow]Cancel[/][/]");
                         bool showChoisesKeyVaulSecret = true;
                         while (showChoisesKeyVaulSecret)
                         {
                             AnsiConsole.Clear();
                             ModuleHeader.Show("/KeyVault/KeyVaultSecretShow");
                             string keyvaultSecret = SelectionPrompt.Show(choicestKeyVaulSecret);
-                            if (keyvaultSecret == "[93](x) ([yellow]Cancel[/])[/]")
+                            if (keyvaultSecret == "[93](x) [yellow]Cancel[/][/]")
                             {
                                 showChoisesKeyVaulSecret = false;
                             }

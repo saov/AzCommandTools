@@ -61,11 +61,11 @@
             AzResourceGroupListEntity[] azResourceGroupListEntity = GetResourceGroupListData();
             List<string> choices = [];
             azResourceGroupListEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
-            choices.Add($"[93](x) ([yellow]Cancel[/])[/]");
+            choices.Add($"[93](x) [yellow]Cancel[/][/]");
             if (azResourceGroupListEntity != null)
             {
                 string resourceGroup = SelectionPrompt.Show(choices);
-                if (resourceGroup != "[93](x) ([yellow]Cancel[/])[/]")
+                if (resourceGroup != "[93](x) [yellow]Cancel[/][/]")
                 {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                     string resourceGroupName = azResourceGroupListEntity.Where(t => resourceGroup.Contains(t.Name))
