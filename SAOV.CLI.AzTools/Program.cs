@@ -17,7 +17,6 @@
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
             //DemoComponents();
-
             AzCliVersionEntity azVersionEntity = CommandHelper.Run<AzCliVersionEntity>(AzCommands.AzureCli_Version, []);
             if (azVersionEntity != null)
             {
@@ -79,6 +78,12 @@
                           new($"[40]{item.MyProperty04}[/]")]);
             });
             AnsiConsole.Write(Components.Table.Show(true, "My Title", "My Caption", columns, rows));
+            List<Dictionary<string, string>> itemsWithParamentersCommand = [];
+            for (int i = 0; i < 9; i++)
+            {
+                itemsWithParamentersCommand.Add([]);
+            }
+            List<AzCliVersionEntity> progress = Components.Progress.Show<AzCliVersionEntity>("My Task", 10, AzCommands.AzureCli_Version, itemsWithParamentersCommand);
             AnsiConsole.WriteLine();
         }
 

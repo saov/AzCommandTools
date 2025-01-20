@@ -75,7 +75,7 @@
                          );
                     });
                     AnsiConsole.WriteLine();
-                    AnsiConsole.Write(Components.Table.Show(true, "[aqua]Azure Subscriptions[/]", string.Empty, columns, rows));
+                    AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure Subscriptions([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                     AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                     _ = Console.ReadKey();
                     return true;
@@ -113,7 +113,7 @@
                 rows.Add([new($"[93]TenantId[/]"), new($"[40]{azAccountShowEntity.TenantId}[/]")]);
                 rows.Add([new($"[93]UserName[/]"), new($"[40]{azAccountShowEntity.UserName}[/]")]);
                 rows.Add([new($"[93]UserType[/]"), new($"[40]{azAccountShowEntity.UserType}[/]")]);
-                AnsiConsole.Write(Components.Table.Show(true, "[aqua]Azure Account Info[/]", string.Empty, columns, rows));
+                AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure Account Info([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -139,7 +139,7 @@
                     string stateColor = item.State == "Enabled" ? "40" : "red";
                     rows.Add([new($"[93]{item.DisplayName}[/]"), new($"[yellow]{item.SubscriptionId}[/]"), new($"[{stateColor}]{item.State}[/]")]);
                 });
-                AnsiConsole.Write(Components.Table.Show(true, "[aqua]Azure Subscriptions[/]", $"[blue]Total Subscriptions {azAccountSubscriptionListEntity.Length}[/]", columns, rows));
+                AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure Subscriptions([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                 AnsiConsole.WriteLine();
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();

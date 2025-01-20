@@ -47,7 +47,7 @@
                     string stateColor = item.ProvisioningState == "Succeeded" ? "40" : "red";
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]{item.Location}[/]"), new($"[{stateColor}]{item.ProvisioningState}[/]")]);
                 });
-                AnsiConsole.Write(Components.Table.Show(true, "[aqua]Azure ResourceGroups[/]", string.Empty, columns, rows));
+                AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure ResourceGroups([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -89,7 +89,7 @@
                             string stateColor = item.ProvisioningState == "Succeeded" ? "40" : "red";
                             rows.Add([new($"[93]{item.Name}[/]"), new($"[purple]{item.Type}[/]"), new($"[{stateColor}]{item.ProvisioningState}[/]"), new($"[yellow]{item.Location}[/]")]);
                         });
-                        AnsiConsole.Write(Components.Table.Show(true, "[aqua]Azure Resources In ResourceGroup[/]", $"[blue]Total Resources {azResourcesInResourcesListEntity.Length}[/]", columns, rows));
+                        AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure Resources In ResourceGroup([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                         AnsiConsole.WriteLine();
                         AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                         _ = Console.ReadKey();
