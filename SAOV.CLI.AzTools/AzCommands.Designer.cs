@@ -124,7 +124,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az extension list-available --query &quot;[].{name:name, summary:summary, version:version}&quot;.
+        ///   Looks up a localized string similar to az extension list-available --query &quot;[@@@AzureQueryFilter].{name:name, summary:summary, version:version}&quot;.
         /// </summary>
         internal static string AzureCli_ExtensionsAvailableList {
             get {
@@ -169,7 +169,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az keyvault list --query &quot;[].{name:name, resourceGroup:resourceGroup, location:location}&quot;.
+        ///   Looks up a localized string similar to az keyvault list --query &quot;[@@@AzureQueryFilter].{name:name, resourceGroup:resourceGroup, location:location}&quot;.
         /// </summary>
         internal static string KeyVault_List {
             get {
@@ -205,7 +205,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az group list --query &quot;[].{name:name, location:location, provisioningState:properties.provisioningState}&quot;.
+        ///   Looks up a localized string similar to az group list --query &quot;[@@@AzureQueryFilter].{name:name, location:location, provisioningState:properties.provisioningState}&quot;.
         /// </summary>
         internal static string ResourceGroup_List {
             get {

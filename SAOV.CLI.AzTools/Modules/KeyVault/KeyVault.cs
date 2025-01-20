@@ -207,7 +207,11 @@
 
         private static AzKeyVaultEntity[] GetKeyVaultListData()
         {
-            return CommandHelper.Run<AzKeyVaultEntity[]>(AzCommands.KeyVault_List, []);
+            string command = AzCommands.KeyVault_List;
+            command = !string.IsNullOrWhiteSpace(Program.AzureQueryFilters) ?
+                                                                                command.Replace("@@@AzureQueryFilter", Program.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
+                                                                                command.Replace("@@@AzureQueryFilter", "");
+            return CommandHelper.Run<AzKeyVaultEntity[]>(command, []);
         }
 
         private static AzKeyVaultSecretEntity[] GetKeyVaulSecretListData(string keyVault)

@@ -102,7 +102,11 @@
 
         private static AzResourceGroupListEntity[] GetResourceGroupListData()
         {
-            return CommandHelper.Run<AzResourceGroupListEntity[]>(AzCommands.ResourceGroup_List, []);
+            string command = AzCommands.ResourceGroup_List;
+            command = !string.IsNullOrWhiteSpace(Program.AzureQueryFilters) ?
+                                                                                command.Replace("@@@AzureQueryFilter", Program.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
+                                                                                command.Replace("@@@AzureQueryFilter", "");
+            return CommandHelper.Run<AzResourceGroupListEntity[]>(command, []);
         }
     }
 }

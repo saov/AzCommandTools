@@ -12,6 +12,8 @@
 
     internal class Program
     {
+        internal static string? AzureQueryFilters;
+
         static void Main(string[] args)
         {
             Console.InputEncoding = Encoding.UTF8;
@@ -31,6 +33,7 @@
                     _ = Enum.TryParse(selectionPromptValue, out MainMenu mainMenuOption);
                     run = mainMenuOption switch
                     {
+                        MainMenu.AzureQueryFilterInCommands => QueryFilterInCommands(),
                         MainMenu.AzureCli => AzureCli.Show(),
                         MainMenu.Account => Account.Show(),
                         MainMenu.ResourceGroup => ResourceGroup.Show(),
@@ -41,6 +44,35 @@
                 }
                 Console.Clear();
             }
+        }
+
+        internal static bool QueryFilterInCommands()
+        {
+            string filtersString = Components.TextPrompt.Show("Filter for AzCli Search (Spacebar for filters splits) : ", (value) => { return true; }, "", true);
+            if (!string.IsNullOrWhiteSpace(filtersString))
+            {
+                string[] filters = filtersString.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                StringBuilder stringBuilder = new();
+                for (int i = 0; i < filters.Length; i++)
+                {
+                    if (i == 0)
+                    {
+                        stringBuilder.Append($"?contains(@@@AzureQueryFilterPropertyName, '{filters[i]}') && ");
+                    }
+                    else
+                    {
+                        stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i]}') && ");
+                    }
+                    
+                }
+                AzureQueryFilters = stringBuilder.ToString();
+                AzureQueryFilters = AzureQueryFilters.Remove(AzureQueryFilters.Length - 4);
+            }
+            else
+            {
+                AzureQueryFilters = null;
+            }
+            return true;
         }
 
         #region Demo DemoComponents

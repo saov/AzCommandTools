@@ -4,17 +4,20 @@
 
     public enum MainMenu
     {
+        [Display(Name = "Azure Query Filter In Commands")]
+        AzureQueryFilterInCommands = 1,
+
         [Display(Name = "Az Cli")]
-        AzureCli = 1,
+        AzureCli = 2,
 
         [Display(Name = "Account")]
-        Account = 2,
+        Account = 3,
 
         [Display(Name = "ResourceGroup")]
-        ResourceGroup = 3,
+        ResourceGroup = 4,
 
         [Display(Name = "KeyVault")]
-        KeyVault = 4,
+        KeyVault = 5,
 
         [Display(Name = "Exit")]
         Exit = 99,
