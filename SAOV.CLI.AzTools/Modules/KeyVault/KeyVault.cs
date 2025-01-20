@@ -64,7 +64,7 @@
             {
                 List<Dictionary<string, string>> itemsWithParamentersCommand = [];
                 azKeyVaultEntity.ToList().ForEach(item => { itemsWithParamentersCommand.Add(new() { { "@@@ResourceGroup", item.ResourceGroup }, { "@@@KeyVault", item.Name } }); });
-                List<AzKeyVaultEntity> networkRules = Components.Progress.Show<AzKeyVaultEntity>("Get NetworkRules for KeyVaults", azKeyVaultEntity.Length, AzCommands.KeyVault_NetworkRule, itemsWithParamentersCommand);
+                List<AzKeyVaultEntity> networkRules = Components.Progress.Show<AzKeyVaultEntity>("Get NetworkRules for KeyVaults", AzCommands.KeyVault_NetworkRule, itemsWithParamentersCommand);
                 for (int i = 0; i < azKeyVaultEntity.Length; i++)
                 {
                     azKeyVaultEntity[i].Bypass = networkRules[i]?.Bypass;

@@ -83,7 +83,7 @@
             {
                 itemsWithParamentersCommand.Add([]);
             }
-            List<AzCliVersionEntity> progress = Components.Progress.Show<AzCliVersionEntity>("My Task", 10, AzCommands.AzureCli_Version, itemsWithParamentersCommand);
+            List<AzCliVersionEntity> progress = Components.Progress.Show<AzCliVersionEntity>("My Task", AzCommands.AzureCli_Version, itemsWithParamentersCommand);
             AnsiConsole.WriteLine();
         }
 

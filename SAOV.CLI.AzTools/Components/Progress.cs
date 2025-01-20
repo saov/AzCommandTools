@@ -5,7 +5,7 @@
 
     internal class Progress
     {
-        internal static List<T> Show<T>(string messageTask, int steps, string command, List<Dictionary<string, string>> itemsWithParamentersCommand)
+        internal static List<T> Show<T>(string messageTask, string command, List<Dictionary<string, string>> itemsWithParamentersCommand)
         {
             List<T> results = [];
             AnsiConsole.Progress()
