@@ -13,9 +13,9 @@
             grid.AddColumn();
             grid.AddColumn();
             grid.AddRow([
-                new Text("Subscription", new Style(40)).Centered(),
-                new Text("Module", new Style(40)).Centered(),
-                new Text("Filter", new Style(40)).Centered()
+                new Text("Subscription", new Style(Color.Blue)).Centered(),
+                new Text("Module", new Style(Color.Blue)).Centered(),
+                new Text("Filter", new Style(Color.Blue)).Centered()
             ]);
             AzAccountShowEntity azAccountShowEntity = CommandHelper.Run<AzAccountShowEntity>(AzCommands.Account_Show, [], false, false);
             string filters = string.IsNullOrWhiteSpace(Program.Filters) ? string.Empty : Program.Filters;
@@ -29,7 +29,7 @@
             AnsiConsole.Clear();
             AnsiConsole.Write(new Panel(grid)
             {
-                Header = new PanelHeader("[Turquoise2]SAOV Azure Tools[/]")
+                Header = new PanelHeader($"[Turquoise2]SAOV Azure Tools in [40]{Environment.UserName}[red]@[/]{Environment.MachineName}[/][/]")
             });
             AnsiConsole.WriteLine();
         }
