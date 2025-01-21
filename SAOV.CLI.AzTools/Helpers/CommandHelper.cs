@@ -5,7 +5,7 @@
 
     internal static class CommandHelper
     {
-        internal static T Run<T>(string command, Dictionary<string, string> paramentersCommand, bool withoutStatus = false)
+        internal static T Run<T>(string command, Dictionary<string, string> paramentersCommand, bool withoutStatus = false, bool showStandardError = true)
         {
             foreach (var item in paramentersCommand)
             {
@@ -23,15 +23,18 @@
             }
             else
             {
-                AnsiConsole.WriteLine();
-                AnsiConsole.WriteException(new Exception(Output));
-                AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
-                _ = Console.ReadKey();
+                if (showStandardError)
+                {
+                    AnsiConsole.WriteLine();
+                    AnsiConsole.WriteException(new Exception(Output));
+                    AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
+                    _ = Console.ReadKey();
+                }
             }
             return default;
         }
 
-        internal static bool Run(string command, Dictionary<string, string> paramentersCommand, bool withoutStatus = false)
+        internal static bool Run(string command, Dictionary<string, string> paramentersCommand, bool withoutStatus = false, bool showStandardError = true)
         {
             foreach (var item in paramentersCommand)
             {
@@ -50,8 +53,11 @@
             }
             else
             {
-                AnsiConsole.WriteException(new Exception(Output));
-                AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
+                if (showStandardError)
+                {
+                    AnsiConsole.WriteException(new Exception(Output));
+                    AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
+                }
             }
             _ = Console.ReadKey();
             return Success;

@@ -62,6 +62,15 @@
             AzKeyVaultEntity[] azKeyVaultEntity = GetKeyVaultListData();
             if (azKeyVaultEntity != null)
             {
+                if (azKeyVaultEntity.Length == 0)
+                {
+                    AnsiConsole.Write(new Markup("[red]No Resources found.[/]"));
+                    AnsiConsole.WriteLine();
+                    AnsiConsole.WriteLine();
+                    AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
+                    _ = Console.ReadKey();
+                    return true;
+                }
                 List<Dictionary<string, string>> itemsWithParamentersCommand = [];
                 azKeyVaultEntity.ToList().ForEach(item => { itemsWithParamentersCommand.Add(new() { { "@@@ResourceGroup", item.ResourceGroup }, { "@@@KeyVault", item.Name } }); });
                 List<AzKeyVaultEntity> networkRules = Components.Progress.Show<AzKeyVaultEntity>("Get NetworkRules for KeyVaults", AzCommands.KeyVault_NetworkRule, itemsWithParamentersCommand);

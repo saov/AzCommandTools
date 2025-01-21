@@ -13,13 +13,14 @@
     internal class Program
     {
         internal static string? AzureQueryFilters;
+        internal static string? Filters;
 
         static void Main(string[] args)
         {
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
             //DemoComponents();
-            AzCliVersionEntity azVersionEntity = CommandHelper.Run<AzCliVersionEntity>(AzCommands.AzureCli_Version, []);
+            AzCliVersionEntity azVersionEntity = CommandHelper.Run<AzCliVersionEntity>(AzCommands.AzureCli_Version, [], false, false);
             if (azVersionEntity != null)
             {
                 List<string> choices = [];
@@ -33,25 +34,38 @@
                     _ = Enum.TryParse(selectionPromptValue, out MainMenu mainMenuOption);
                     run = mainMenuOption switch
                     {
-                        MainMenu.AzureQueryFilterInCommands => QueryFilterInCommands(),
                         MainMenu.AzureCli => AzureCli.Show(),
                         MainMenu.Account => Account.Show(),
-                        MainMenu.ResourceGroup => ResourceGroup.Show(),
                         MainMenu.KeyVault => KeyVault.Show(),
+                        MainMenu.ResourceGroup => ResourceGroup.Show(),
+                        MainMenu.QueryFilters => QueryFilters(),
                         MainMenu.Exit => false,
                         _ => false
                     };
                 }
                 Console.Clear();
             }
+            else
+            {
+                AnsiConsole.Clear();
+                Banner.Show();
+                AnsiConsole.Write(new Markup("[red]The installed [40]az[/] command was not detected. [yellow]([/][40]https://learn.microsoft.com/en-us/cli/azure/install-azure-cli[/][yellow])[/][/]"));
+                AnsiConsole.WriteLine();
+                AnsiConsole.WriteLine();
+            }
         }
 
-        internal static bool QueryFilterInCommands()
+        internal static bool QueryFilters()
         {
-            string filtersString = Components.TextPrompt.Show("Filter for AzCli Search (Spacebar for filters splits) : ", (value) => { return true; }, "", true);
-            if (!string.IsNullOrWhiteSpace(filtersString))
+            AnsiConsole.Clear();
+            Banner.Show();
+            AnsiConsole.Write(new Markup("[red]Filter is Case Sensitive.[/]"));
+            AnsiConsole.WriteLine();
+            AnsiConsole.WriteLine();
+            Filters = Components.TextPrompt.Show("[93]Filter for AzCli Search ([40]Space for multi filters[/])[/] [yellow]: [/]", (value) => { return true; }, "", true);
+            if (!string.IsNullOrWhiteSpace(Filters))
             {
-                string[] filters = filtersString.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                string[] filters = Filters.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 StringBuilder stringBuilder = new();
                 for (int i = 0; i < filters.Length; i++)
                 {
@@ -63,7 +77,7 @@
                     {
                         stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i]}') && ");
                     }
-                    
+
                 }
                 AzureQueryFilters = stringBuilder.ToString();
                 AzureQueryFilters = AzureQueryFilters.Remove(AzureQueryFilters.Length - 4);

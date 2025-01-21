@@ -46,7 +46,7 @@
             return OperatingSystem.IsWindows() ?
                    @$"/c ""{command}""" :
                    OperatingSystem.IsLinux() ?
-                    @$"-c ""{command.Replace("\"", "'")}""" :
+                     @$"-c ""{command.Replace("\"", "\\\"")}""" :
                     throw new Exception("Unknown OperatingSystem.");
         }
     }

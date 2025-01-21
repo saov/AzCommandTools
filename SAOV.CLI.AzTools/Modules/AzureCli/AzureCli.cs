@@ -117,7 +117,7 @@
             ModuleHeader.Show("/AzureCli/AddExtension");
             AzCliExtensionEntity[] azCliExtensionEntity = GetExtensionsAvailableListData();
             List<string> choices = [];
-            azCliExtensionEntity.ToList().ForEach(item => { choices.Add($"{item.Summary}({item.Version})"); });
+            azCliExtensionEntity.ToList().ForEach(item => { choices.Add($"({item.Name}){item.Summary}({item.Version})"); });
             choices.Add($"[93](x) [yellow]Cancel[/][/]");
             if (azCliExtensionEntity != null)
             {
