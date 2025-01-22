@@ -4,6 +4,13 @@
 
     internal static class JsonHelper
     {
+        public static string GetJson<T>(T obj)
+        {
+            return obj != null ?
+                JsonSerializer.Serialize<T>(obj) :
+                string.Empty;
+        }
+
         public static T GetEntity<T>((bool Success, string Output) input) where T : class
         {
             return input.Success ?

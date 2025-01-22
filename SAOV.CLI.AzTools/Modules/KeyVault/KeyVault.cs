@@ -49,7 +49,7 @@
                 {
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[40]{item.ResourceGroup}[/]"), new($"[yellow]{item.Location}[/]")]);
                 });
-                AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure KeyVaults([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                FormatResults.Show<AzKeyVaultEntity[]>(azKeyVaultEntity, Components.Table.Show(true, $"[aqua]Azure KeyVaults([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -94,7 +94,7 @@
                     string stateColor = item.NetworkRuleSetDefaultAction == "Allow" ? "red" : "40";
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[40]{item.ResourceGroup}[/]"), new($"[aqua]{item.NetworkRuleSetBypass}[/]"), new($"[{stateColor}]{item.NetworkRuleSetDefaultAction}[/]"), new($"[yellow]{item.Location}[/]")]);
                 });
-                AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure KeyVaults With Network Rules([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                FormatResults.Show<AzKeyVaultEntity[]>(azKeyVaultEntity, Components.Table.Show(true, $"[aqua]Azure KeyVaults With Network Rules([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -139,7 +139,7 @@
                         {
                             rows.Add([new($"[93]{item.Name}[/]")]);
                         });
-                        AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure KeyVaults Secrets([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                        FormatResults.Show<AzKeyVaultSecretEntity[]>(azKeyVaultSecretEntity, Components.Table.Show(true, $"[aqua]Azure KeyVaults Secrets([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                         AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                         _ = Console.ReadKey();
                     }
@@ -202,7 +202,7 @@
                                     ];
                                     List<List<Markup>> rows = [];
                                     rows.Add([new($"[93]{azKeyVaultSecretValueEntity.Name}[/]"), new($"[yellow]\"[40]{Markup.Escape(azKeyVaultSecretValueEntity.Value)}[/]\"[/]")]);
-                                    AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure KeyVault Secret Value([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                                    FormatResults.Show<AzKeyVaultSecretEntity>(azKeyVaultSecretValueEntity, Components.Table.Show(true, $"[aqua]Azure KeyVault Secret Value([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                                     AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                                     _ = Console.ReadKey();
                                 }
@@ -256,7 +256,7 @@
                         {
                             rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]\"[40]{Markup.Escape(item.Value)}[/]\"[/]")]);
                         });
-                        AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure KeyVault All Secrets Values([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                        FormatResults.Show<List<AzKeyVaultSecretEntity>>(secrets, Components.Table.Show(true, $"[aqua]Azure KeyVault All Secrets Values([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                         AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                         _ = Console.ReadKey();
                     }

@@ -55,7 +55,7 @@
                 {
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[green]{item.Version}[/]")]);
                 });
-                AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure Installed Extensions([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                FormatResults.Show<AzCliExtensionEntity[]>(azCliExtensionEntity, Components.Table.Show(true, $"[aqua]Azure Installed Extensions([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -80,7 +80,7 @@
                 {
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]{item.Summary}[/]"), new($"[green]{item.Version}[/]")]);
                 });
-                AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure Available Extensions([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                FormatResults.Show<AzCliExtensionEntity[]>(azCliExtensionEntity, Components.Table.Show(true, $"[aqua]Azure Available Extensions([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
