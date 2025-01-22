@@ -16,7 +16,7 @@
             while (!run)
             {
                 ModuleHeader.Show("/Account");
-                string selectionPromptValue = Components.SelectionPrompt.Show(choices);
+                string selectionPromptValue = SelectionPrompt.Show(choices);
                 _ = Enum.TryParse(selectionPromptValue, out AccountMenu mainMenuOption);
                 run = mainMenuOption switch
                 {
@@ -114,7 +114,8 @@
                 rows.Add([new($"[93]TenantId[/]"), new($"[40]{azAccountShowEntity.TenantId}[/]")]);
                 rows.Add([new($"[93]UserName[/]"), new($"[40]{azAccountShowEntity.UserName}[/]")]);
                 rows.Add([new($"[93]UserType[/]"), new($"[40]{azAccountShowEntity.UserType}[/]")]);
-                FormatResults.Show<AzAccountShowEntity>(azAccountShowEntity, Components.Table.Show(true, $"[aqua]Azure Account Info([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                string titleResult = $"[aqua]Azure Account Info([40]{rows.Count}[/])[/]";
+                FormatResults.Show<AzAccountShowEntity>(azAccountShowEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -140,7 +141,8 @@
                     string stateColor = item.State == "Enabled" ? "40" : "red";
                     rows.Add([new($"[93]{item.DisplayName}[/]"), new($"[yellow]{item.SubscriptionId}[/]"), new($"[{stateColor}]{item.State}[/]")]);
                 });
-                FormatResults.Show<AzAccountSubscriptionListEntity[]>(azAccountSubscriptionListEntity, Components.Table.Show(true, $"[aqua]Azure Subscriptions([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                string titleResult = $"[aqua]Azure Subscriptions([40]{rows.Count}[/])[/]";
+                FormatResults.Show<AzAccountSubscriptionListEntity[]>(azAccountSubscriptionListEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;

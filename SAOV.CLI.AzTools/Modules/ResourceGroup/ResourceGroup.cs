@@ -5,7 +5,6 @@
     using SAOV.CLI.AzTools.Menus;
     using SAOV.CLI.AzTools.Modules.ResourceGroup.Entities;
     using Spectre.Console;
-    using Spectre.Console.Json;
     using System;
 
     internal static class ResourceGroup
@@ -49,7 +48,7 @@
                     string stateColor = item.ProvisioningState == "Succeeded" ? "40" : "red";
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]{item.Location}[/]"), new($"[{stateColor}]{item.ProvisioningState}[/]")]);
                 });
-                FormatResults.Show<AzResourceGroupListEntity[]>(azResourceGroupListEntity, Components.Table.Show(true, $"[aqua]Azure ResourceGroups([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                FormatResults.Show<AzResourceGroupListEntity[]>(azResourceGroupListEntity, null, Components.Table.Show(true, $"[aqua]Azure ResourceGroups([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -91,7 +90,8 @@
                             string stateColor = item.ProvisioningState == "Succeeded" ? "40" : "red";
                             rows.Add([new($"[93]{item.Name}[/]"), new($"[purple]{item.Type}[/]"), new($"[{stateColor}]{item.ProvisioningState}[/]"), new($"[yellow]{item.Location}[/]")]);
                         });
-                        FormatResults.Show<AzResourceGroupListEntity[]>(azResourcesInResourcesListEntity, Components.Table.Show(true, $"[aqua]Azure Resources In ResourceGroup([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                        string titleResult = $"[aqua]Azure Resources In ResourceGroup [yellow]\"[40]{resourceGroupName}[/]\"[/]([40]{rows.Count}[/])[/]";
+                        FormatResults.Show<AzResourceGroupListEntity[]>(azResourcesInResourcesListEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
                         AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                         _ = Console.ReadKey();
                         return true;
