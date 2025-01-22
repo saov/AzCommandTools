@@ -24,6 +24,7 @@
                     KeyVaultMenu.GetKeyVaultListWithNetworkRules => GetKeyVaultListWithNetworkRules(),
                     KeyVaultMenu.GetKeyVaulSecretList => GetKeyVaulSecretList(),
                     KeyVaultMenu.KeyVaultSecretShow => KeyVaultSecretShow(),
+                    KeyVaultMenu.KeyVaultAllSecretShow => KeyVaultAllSecretShow(),
                     KeyVaultMenu.Exit => true,
                     _ => false
                 };
@@ -76,8 +77,8 @@
                 List<AzKeyVaultEntity> networkRules = Components.Progress.Show<AzKeyVaultEntity>("Get NetworkRules for KeyVaults", AzCommands.KeyVault_NetworkRule, itemsWithParamentersCommand);
                 for (int i = 0; i < azKeyVaultEntity.Length; i++)
                 {
-                    azKeyVaultEntity[i].Bypass = networkRules[i]?.Bypass;
-                    azKeyVaultEntity[i].DefaultAction = networkRules[i]?.DefaultAction;
+                    azKeyVaultEntity[i].NetworkRuleSetBypass = networkRules[i]?.NetworkRuleSetBypass;
+                    azKeyVaultEntity[i].NetworkRuleSetDefaultAction = networkRules[i]?.NetworkRuleSetDefaultAction;
                 }
                 List<KeyValuePair<Markup, Justify>> columns =
                 [
@@ -90,8 +91,8 @@
                 List<List<Markup>> rows = [];
                 azKeyVaultEntity.OrderBy(t => t.Name).ToList().ForEach(item =>
                 {
-                    string stateColor = item.DefaultAction == "Allow" ? "red" : "40";
-                    rows.Add([new($"[93]{item.Name}[/]"), new($"[40]{item.ResourceGroup}[/]"), new($"[aqua]{item.Bypass}[/]"), new($"[{stateColor}]{item.DefaultAction}[/]"), new($"[yellow]{item.Location}[/]")]);
+                    string stateColor = item.NetworkRuleSetDefaultAction == "Allow" ? "red" : "40";
+                    rows.Add([new($"[93]{item.Name}[/]"), new($"[40]{item.ResourceGroup}[/]"), new($"[aqua]{item.NetworkRuleSetBypass}[/]"), new($"[{stateColor}]{item.NetworkRuleSetDefaultAction}[/]"), new($"[yellow]{item.Location}[/]")]);
                 });
                 AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure KeyVaults With Network Rules([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
@@ -200,13 +201,64 @@
                                         new(new("Value"), Justify.Left)
                                     ];
                                     List<List<Markup>> rows = [];
-                                    rows.Add([new($"[93]{azKeyVaultSecretValueEntity.Name}[/]"), new($"[yellow]\"[40]{azKeyVaultSecretValueEntity.Value}[/]\"[/]")]);
+                                    rows.Add([new($"[93]{azKeyVaultSecretValueEntity.Name}[/]"), new($"[yellow]\"[40]{Markup.Escape(azKeyVaultSecretValueEntity.Value)}[/]\"[/]")]);
                                     AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure KeyVault Secret Value([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
                                     AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                                     _ = Console.ReadKey();
                                 }
                             }
                         }
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private static bool KeyVaultAllSecretShow()
+        {
+            AzKeyVaultEntity[] azKeyVaultEntity = GetKeyVaultListData();
+            List<string> choices = [];
+            azKeyVaultEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
+            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            if (azKeyVaultEntity != null)
+            {
+                bool showChoises = true;
+                while (showChoises)
+                {
+                    AnsiConsole.Clear();
+                    ModuleHeader.Show("/KeyVault/KeyVaultAllSecretShow");
+                    string keyvault = SelectionPrompt.Show(choices);
+                    if (keyvault == "[93](x) [yellow]Cancel[/][/]")
+                    {
+                        showChoises = false;
+                        return true;
+                    }
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+                    string keyvaultName = azKeyVaultEntity.Where(t => keyvault.Contains(t.Name))
+                                .OrderBy(t => t.Name)
+                                .Select(t => t.Name)
+                                .First();
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+                    AzKeyVaultSecretEntity[] azKeyVaultSecretEntity = GetKeyVaulSecretListData(keyvaultName);
+                    if (azKeyVaultSecretEntity != null)
+                    {
+                        List<Dictionary<string, string>> itemsWithParamentersCommand = [];
+                        azKeyVaultSecretEntity.ToList().ForEach(item => { itemsWithParamentersCommand.Add(new() { { "@@@KeyVault", keyvault }, { "@@@SecretName", item.Name } }); });
+                        List<AzKeyVaultSecretEntity> secrets = Components.Progress.Show<AzKeyVaultSecretEntity>("Get Secrets for KeyVault", AzCommands.KeyVault_SecretShow, itemsWithParamentersCommand);
+                        List<KeyValuePair<Markup, Justify>> columns =
+                        [
+                            new(new("Secret"), Justify.Left),
+                            new(new("Value"), Justify.Left)
+                        ];
+                        List<List<Markup>> rows = [];
+                        secrets.ToList().ForEach(item =>
+                        {
+                            rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]\"[40]{Markup.Escape(item.Value)}[/]\"[/]")]);
+                        });
+                        AnsiConsole.Write(Components.Table.Show(true, $"[aqua]Azure KeyVault All Secrets Values([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                        AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
+                        _ = Console.ReadKey();
                     }
                 }
                 return true;

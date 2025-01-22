@@ -1,15 +1,22 @@
 ﻿namespace SAOV.CLI.AzTools
 {
     using SAOV.CLI.AzTools.Helpers;
+    using SAOV.CLI.AzTools.Modules.Account.Entities;
     using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
     using Spectre.Console;
     using System.Reflection;
-    using static System.Net.Mime.MediaTypeNames;
 
     internal static class Banner
     {
         internal static void Show()
         {
+            AzAccountShowEntity azAccountShowEntity = CommandHelper.Run<AzAccountShowEntity>(AzCommands.Account_Show, [], false, false);
+            string subscription = azAccountShowEntity == null ?
+                                    string.Empty :
+                                    $"[40]{azAccountShowEntity?.Name} ([Magenta1]{azAccountShowEntity?.Id}[/])[/]";
+            string filters = !string.IsNullOrEmpty(Program.Filters) ?
+                                $"[Turquoise2]\"[/]{Program.Filters}[Turquoise2]\"[/]" :
+                                string.Empty;
             AzCliVersionEntity azVersionEntity = CommandHelper.Run<AzCliVersionEntity>(AzCommands.AzureCli_Version, [], false, false);
             Table tableAzCli = new Table()
                 .Border(TableBorder.None)
@@ -18,7 +25,6 @@
                 .AddRow(new Markup("[93]Az-Cli [yellow]:[/][/]"), new Markup($"[40]{azVersionEntity?.AzureCli}[/]"))
                 .AddRow(new Markup("[93]Az-Core [yellow]:[/][/]"), new Markup($"[40]{azVersionEntity?.AzureCliCore}[/]"))
                 .AddRow(new Markup("[93]Az-Telemetry [yellow]:[/][/]"), new Markup($"[40]{azVersionEntity?.AzureCliTelemetry}[/]"))
-                .AddRow(new Markup($"[93]Query Filter [yellow]:[/][/]"), new Markup($"[red][Turquoise2]\"[/]{Program.Filters}[Turquoise2]\"[/][/]"))
                 .HideHeaders()
                 .HideFooters()
                 .HideRowSeparators()
@@ -56,11 +62,25 @@
                 .HideFooters()
                 .HideRowSeparators()
                 .Centered();
+            Table tableExtraInfo = new Table()
+                .Border(TableBorder.None)
+                .AddColumn(string.Empty)
+                .AddRow(new Markup($"[Magenta1]Subscription [yellow]:[/][/] {subscription}").LeftJustified())
+                .AddRow(new Markup($"[Magenta1]Query Filter [yellow]:[/][/] [red]{filters}[/]"))
+                .HideHeaders()
+                .HideFooters()
+                .HideRowSeparators()
+                .Centered();
             Table tableBanner = new Table()
                 .Border(TableBorder.Square)
                 .BorderColor(Color.Grey)
-                .AddColumn(new TableColumn(new FigletText("SAOV Azure Tools").Centered().Color(Color.Turquoise2)).Centered())
+                .AddColumn(string.Empty)
+                .AddRow(new FigletText("SAOV Azure Tools").Centered().Color(Color.Turquoise2)).Centered()
                 .AddRow(tableInfo)
+                .AddEmptyRow()
+                .AddRow(tableExtraInfo)
+                .HideHeaders()
+                .HideFooters()
                 .Centered();
             AnsiConsole.Write(tableBanner);
             AnsiConsole.WriteLine();

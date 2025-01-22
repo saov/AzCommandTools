@@ -16,6 +16,9 @@
         [Display(Name = "Key Vault Secret Show")]
         KeyVaultSecretShow = 4,
 
+        [Display(Name = "Key Vault All Secret Show")]
+        KeyVaultAllSecretShow = 5,
+
         [Display(Name = "Exit")]
         Exit = 99,
     }

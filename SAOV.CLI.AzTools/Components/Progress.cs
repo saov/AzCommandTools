@@ -24,7 +24,7 @@
                     {
                         for (int i = 0; i < itemsWithParamentersCommand.Count; i++)
                         {
-                            results.Add(CommandHelper.Run<T>(command, itemsWithParamentersCommand[i], true));
+                            results.Add(CommandHelper.Run<T>(command, itemsWithParamentersCommand[i], true, false));
                             progressTask.Increment(i + 1 != itemsWithParamentersCommand.Count ? 100 / itemsWithParamentersCommand.Count : 100);
                         }
                     }

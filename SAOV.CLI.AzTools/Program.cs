@@ -59,32 +59,44 @@
         {
             AnsiConsole.Clear();
             Banner.Show();
-            AnsiConsole.Write(new Markup("[red]Filter is Case Sensitive.[/]"));
+            AnsiConsole.Write(new Markup("[red]Filter is Case Sensitive or Lower Case or UpperCase.[/]"));
             AnsiConsole.WriteLine();
             AnsiConsole.WriteLine();
-            Filters = Components.TextPrompt.Show("[93]Filter for AzCli Search ([40]Space for multi filters[/])[/] [yellow]: [/]", (value) => { return true; }, "", true);
-            if (!string.IsNullOrWhiteSpace(Filters))
+            string filter = Components.TextPrompt.Show("[93]Filter for AzCli Search ([40]Space for multi filters[/])[/] [yellow]: [/]", (value) => { return true; }, "", true);
+            if (!string.IsNullOrWhiteSpace(filter))
             {
-                string[] filters = Filters.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                string[] filters = filter.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 StringBuilder stringBuilder = new();
                 for (int i = 0; i < filters.Length; i++)
                 {
                     if (i == 0)
                     {
-                        stringBuilder.Append($"?contains(@@@AzureQueryFilterPropertyName, '{filters[i]}') && ");
+                        Filters = $"({filters[i]} || {filters[i].ToLower()} || {filters[i].ToUpper()})";
+                        stringBuilder.Append($"?(contains(@@@AzureQueryFilterPropertyName, '{filters[i]}') || ");
+                        stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i].ToLower()}') || ");
+                        stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i].ToUpper()}')) && ");
+                    }
+                    else if (i == filters.Length - 1)
+                    {
+                        Filters = $"{Filters} && ({filters[i]} || {filters[i].ToLower()} || {filters[i].ToUpper()})";
+                        stringBuilder.Append($"(contains(@@@AzureQueryFilterPropertyName, '{filters[i]}') || ");
+                        stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i].ToLower()}') || ");
+                        stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i].ToUpper()}'))");
                     }
                     else
                     {
-                        stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i]}') && ");
+                        Filters = $"{Filters} && ({filters[i]} || {filters[i].ToLower()} || {filters[i].ToUpper()})";
+                        stringBuilder.Append($"(contains(@@@AzureQueryFilterPropertyName, '{filters[i]}') || ");
+                        stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i].ToLower()}') || ");
+                        stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i].ToUpper()}')) && ");
                     }
-
                 }
                 AzureQueryFilters = stringBuilder.ToString();
-                AzureQueryFilters = AzureQueryFilters.Remove(AzureQueryFilters.Length - 4);
             }
             else
             {
                 AzureQueryFilters = null;
+                Filters = string.Empty;
             }
             return true;
         }

@@ -8,23 +8,21 @@
     {
         internal static void Show(string path)
         {
-            Grid grid = new();
-            grid.AddColumn();
-            grid.AddColumn();
-            grid.AddColumn();
-            grid.AddRow([
-                new Text("Subscription", new Style(Color.Blue)).Centered(),
-                new Text("Module", new Style(Color.Blue)).Centered(),
-                new Text("Filter", new Style(Color.Blue)).Centered()
-            ]);
             AzAccountShowEntity azAccountShowEntity = CommandHelper.Run<AzAccountShowEntity>(AzCommands.Account_Show, [], false, false);
             string filters = string.IsNullOrWhiteSpace(Program.Filters) ? string.Empty : Program.Filters;
-            string subscription = $"[93]{azAccountShowEntity?.Name}{Environment.NewLine}([Magenta1]{azAccountShowEntity?.Id}[/])[/]";
+            string subscription = azAccountShowEntity == null ?
+                                    string.Empty : 
+                                    $"[green]{azAccountShowEntity?.Name} ([Magenta1]{azAccountShowEntity?.Id}[/])[/]";
+            Grid grid = new();
+            grid.AddColumn();
             grid.AddRow([
-
-                new Markup(azAccountShowEntity == null ? string.Empty : subscription).LeftJustified(),
-                new Markup($"[yellow]{path}[/]").Centered(),
-                new Markup($"[red]{filters}[/]").RightJustified()
+                new Markup($"[navy]Subscription [/][yellow]: [/]{subscription}").LeftJustified()
+            ]);
+            grid.AddRow([
+                new Markup($"[navy]Module [/][yellow]: [/][orange3]{path}[/]").LeftJustified()
+            ]);
+            grid.AddRow([
+                new Markup($"[navy]Filter [/][yellow]: [/][red]{filters}[/]").RightJustified().LeftJustified()                
             ]);
             AnsiConsole.Clear();
             AnsiConsole.Write(new Panel(grid)

@@ -14,9 +14,9 @@
         public string? Location { get; set; }
 
         [JsonPropertyName("bypass")]
-        public string? Bypass { get; set; }
+        public string? NetworkRuleSetBypass { get; set; }
 
         [JsonPropertyName("defaultAction")]
-        public string? DefaultAction { get; set; }
+        public string? NetworkRuleSetDefaultAction { get; set; }
     }
 }

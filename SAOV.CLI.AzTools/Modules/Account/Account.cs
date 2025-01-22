@@ -89,6 +89,7 @@
             ModuleHeader.Show("/Account/LogOut");
             if (TextPrompt.Show("Do you want to continue?"))
             {
+                AnsiConsole.WriteLine();
                 return CommandHelper.Run(AzCommands.Account_Logout, []);
             }
             return true;

@@ -10,7 +10,8 @@
               .Border(tableBorder ? TableBorder.Square : TableBorder.None)
               .Title($"{title}")
               .Caption($"{caption}")
-              .BorderColor(Color.Grey);
+              .BorderColor(Color.Grey)
+              .ShowRowSeparators();
             columns.ForEach(column =>
             {
                 table.AddColumn(new TableColumn(column.Key).Alignment(column.Value));
