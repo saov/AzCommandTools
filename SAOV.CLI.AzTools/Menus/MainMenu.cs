@@ -17,7 +17,10 @@
         ResourceGroup = 4,
 
         [Display(Name = "Query Filters")]
-        QueryFilters = 98,
+        QueryFilters = 97,
+
+        [Display(Name = "Navigation Map")]
+        NavigationMap = 98,
 
         [Display(Name = "Exit")]
         Exit = 99,

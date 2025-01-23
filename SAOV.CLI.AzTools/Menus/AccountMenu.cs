@@ -4,10 +4,10 @@
 
     public enum AccountMenu
     {
-        [Display(Name = "LogIn")]
+        [Display(Name = "Log In")]
         LogIn = 1,
 
-        [Display(Name = "LogOut")]
+        [Display(Name = "Log Out")]
         LogOut = 2,
 
         [Display(Name = "Show Current Subscription")]

@@ -10,7 +10,7 @@
         [Display(Name = "Get Extensions Installed List")]
         GetExtensionsInstalledList = 2,
 
-        [Display(Name = "Ge tExtensions Available List")]
+        [Display(Name = "Get Extensions Available List")]
         GetExtensionsAvailableList = 3,
 
         [Display(Name = "Update Extension")]
