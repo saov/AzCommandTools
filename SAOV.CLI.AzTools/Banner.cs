@@ -14,8 +14,8 @@
             string subscription = azAccountShowEntity == null ?
                                     string.Empty :
                                     $"[40]{azAccountShowEntity?.Name} ([Magenta1]{azAccountShowEntity?.Id}[/])[/]";
-            string filters = !string.IsNullOrEmpty(Program.Filters) ?
-                                $"[Turquoise2]\"[/]{Program.Filters}[Turquoise2]\"[/]" :
+            string filters = !string.IsNullOrEmpty(AzCommand.Filters) ?
+                                $"[Turquoise2]\"[/]{AzCommand.Filters}[Turquoise2]\"[/]" :
                                 string.Empty;
             AzCliVersionEntity azVersionEntity = CommandHelper.Run<AzCliVersionEntity>(AzCommands.AzureCli_Version, [], false, false);
             Table tableAzCli = new Table()

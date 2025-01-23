@@ -170,8 +170,8 @@
         private static AzCliExtensionEntity[] GetExtensionsAvailableListData()
         {
             string command = AzCommands.AzureCli_ExtensionsAvailableList;
-            command = !string.IsNullOrWhiteSpace(Program.AzureQueryFilters) ?
-                                                                                command.Replace("@@@AzureQueryFilter", Program.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
+            command = !string.IsNullOrWhiteSpace(AzCommand.AzureQueryFilters) ?
+                                                                                command.Replace("@@@AzureQueryFilter", AzCommand.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
                                                                                 command.Replace("@@@AzureQueryFilter", "");
             return CommandHelper.Run<AzCliExtensionEntity[]>(command, []);
         }

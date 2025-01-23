@@ -9,7 +9,7 @@
         internal static void Show(string path)
         {
             AzAccountShowEntity azAccountShowEntity = CommandHelper.Run<AzAccountShowEntity>(AzCommands.Account_Show, [], false, false);
-            string filters = string.IsNullOrWhiteSpace(Program.Filters) ? string.Empty : Program.Filters;
+            string filters = string.IsNullOrWhiteSpace(AzCommand.Filters) ? string.Empty : AzCommand.Filters;
             string subscription = azAccountShowEntity == null ?
                                     string.Empty : 
                                     $"[green]{azAccountShowEntity?.Name} ([Magenta1]{azAccountShowEntity?.Id}[/])[/]";
