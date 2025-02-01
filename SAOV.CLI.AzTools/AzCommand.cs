@@ -126,6 +126,7 @@
             {
                 string[] filters = filter.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 StringBuilder stringBuilder = new();
+                Filters = string.Join(" ", filters);
                 for (int i = 0; i < filters.Length; i++)
                 {
                     if (i == 0)
@@ -150,7 +151,10 @@
                         stringBuilder.Append($"contains(@@@AzureQueryFilterPropertyName, '{filters[i].ToUpper()}')) && ");
                     }
                 }
-                AzureQueryFilters = stringBuilder.ToString();
+                string totalFilter = stringBuilder.ToString();
+                AzureQueryFilters = totalFilter.EndsWith(" && ") ?
+                                        totalFilter.Remove(totalFilter.Length - 4, 4) :
+                                        totalFilter;
             }
             else
             {

@@ -10,9 +10,12 @@
             AnsiConsole.WriteLine();
             if (formatResult == "json")
             {
-                AnsiConsole.Write(title);
-                AnsiConsole.WriteLine();
-                AnsiConsole.WriteLine();
+                if (title != null)
+                {
+                    AnsiConsole.Write(title);
+                    AnsiConsole.WriteLine();
+                    AnsiConsole.WriteLine();
+                }
                 AnsiConsole.Write(JsonText.Show<T>(dataRaw));
                 AnsiConsole.WriteLine();
                 AnsiConsole.WriteLine();
