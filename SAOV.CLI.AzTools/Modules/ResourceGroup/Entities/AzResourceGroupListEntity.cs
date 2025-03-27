@@ -5,15 +5,15 @@
     internal class AzResourceGroupListEntity
     {
         [JsonPropertyName("location")]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [JsonPropertyName("provisioningState")]
-        public string ProvisioningState { get; set; }
+        public string? ProvisioningState { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
     }
 }

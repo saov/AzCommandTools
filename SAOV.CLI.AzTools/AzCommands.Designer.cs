@@ -221,5 +221,23 @@ namespace SAOV.CLI.AzTools {
                 return ResourceManager.GetString("ResourceGroup-ResourcesList", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az network vnet subnet show --ids @@@Ids --query &quot;{addressPrefix:addressPrefix,name:name,provisioningState:provisioningState,networkSecurityGroup:networkSecurityGroup.id,routeTable:routeTable.id}&quot;.
+        /// </summary>
+        internal static string Subnet_Show {
+            get {
+                return ResourceManager.GetString("Subnet-Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az network vnet list --query &quot;[@@@AzureQueryFilter].{addressSpace:addressSpace.addressPrefixes,name:name,provisioningState:provisioningState,resourceGroup:resourceGroup,subnets:subnets[*].id}&quot;.
+        /// </summary>
+        internal static string Vnet_List {
+            get {
+                return ResourceManager.GetString("Vnet-List", resourceCulture);
+            }
+        }
     }
 }

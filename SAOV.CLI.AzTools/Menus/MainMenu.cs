@@ -16,6 +16,9 @@
         [Display(Name = "ResourceGroup")]
         ResourceGroup = 4,
 
+        [Display(Name = "Vnet")]
+        Vnet = 5,
+
         [Display(Name = "Query Filters")]
         QueryFilters = 97,
 

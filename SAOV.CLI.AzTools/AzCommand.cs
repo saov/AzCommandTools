@@ -8,6 +8,7 @@
     using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
     using SAOV.CLI.AzTools.Modules.KeyVault;
     using SAOV.CLI.AzTools.Modules.ResourceGroup;
+    using SAOV.CLI.AzTools.Modules.Vnet;
     using Spectre.Console;
     using Spectre.Console.Cli;
     using System.ComponentModel;
@@ -50,6 +51,7 @@
                         MainMenu.Account => Account.Show(),
                         MainMenu.KeyVault => KeyVault.Show(),
                         MainMenu.ResourceGroup => ResourceGroup.Show(),
+                        MainMenu.Vnet => Vnet.Show(),
                         MainMenu.QueryFilters => QueryFilters(),
                         MainMenu.NavigationMap => NavigationMap(),
                         MainMenu.Exit => false,
