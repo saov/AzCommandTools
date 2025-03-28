@@ -223,7 +223,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az network vnet subnet show --ids @@@Ids --query &quot;{addressPrefix:addressPrefix,name:name,provisioningState:provisioningState,networkSecurityGroup:networkSecurityGroup.id,routeTable:routeTable.id}&quot;.
+        ///   Looks up a localized string similar to az network vnet subnet show --ids @@@Ids --query &quot;{addressPrefix:addressPrefix,addressPrefixes:addressPrefixes,name:name,provisioningState:provisioningState,networkSecurityGroup:networkSecurityGroup.id,routeTable:routeTable.id}&quot;.
         /// </summary>
         internal static string Subnet_Show {
             get {

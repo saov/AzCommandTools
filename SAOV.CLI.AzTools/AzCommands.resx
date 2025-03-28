@@ -172,7 +172,7 @@
     <value>az resource list --resource-group @@@ResourceGroup --query "[].{name:name, location:location, provisioningState:provisioningState, type:type}"</value>
   </data>
   <data name="Subnet-Show" xml:space="preserve">
-    <value>az network vnet subnet show --ids @@@Ids --query "{addressPrefix:addressPrefix,name:name,provisioningState:provisioningState,networkSecurityGroup:networkSecurityGroup.id,routeTable:routeTable.id}"</value>
+    <value>az network vnet subnet show --ids @@@Ids --query "{addressPrefix:addressPrefix,addressPrefixes:addressPrefixes,name:name,provisioningState:provisioningState,networkSecurityGroup:networkSecurityGroup.id,routeTable:routeTable.id}"</value>
   </data>
   <data name="Vnet-List" xml:space="preserve">
     <value>az network vnet list --query "[@@@AzureQueryFilter].{addressSpace:addressSpace.addressPrefixes,name:name,provisioningState:provisioningState,resourceGroup:resourceGroup,subnets:subnets[*].id}"</value>

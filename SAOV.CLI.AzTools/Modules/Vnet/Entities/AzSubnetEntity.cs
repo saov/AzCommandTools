@@ -4,8 +4,16 @@
 
     internal class AzSubnetEntity
     {
+        public AzSubnetEntity()
+        {
+            AddressPrefixes = [];
+        }
+
         [JsonPropertyName("addressPrefix")]
         public string? AddressPrefix { get; set; }
+
+        [JsonPropertyName("addressPrefixes")]
+        public List<string> AddressPrefixes { get; set; }
 
         [JsonPropertyName("name")]
         public string? Name { get; set; }

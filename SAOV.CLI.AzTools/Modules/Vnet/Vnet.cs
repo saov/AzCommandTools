@@ -3,6 +3,7 @@
     using SAOV.CLI.AzTools.Components;
     using SAOV.CLI.AzTools.Helpers;
     using SAOV.CLI.AzTools.Menus;
+    using SAOV.CLI.AzTools.Modules.KeyVault.Entities;
     using SAOV.CLI.AzTools.Modules.Vnet.Entities;
     using Spectre.Console;
     using System.Text;
@@ -83,32 +84,43 @@
                     new(new("ProvisioningState"), Justify.Center)
                 ];
                 Spectre.Console.Table mainTable = Components.Table.Show(true, $"[aqua]Azure Vnets([40]{azVnetListEntity.Length}[/])[/]", string.Empty, columnsMain);
-                azVnetListEntity.OrderBy(t => t.Name).ToList().ForEach(item =>
+                azVnetListEntity = azVnetListEntity.OrderBy(t => t.Name).ToArray();
+                for (int i = 0; i < azVnetListEntity.Length; i++)
                 {
-                    string stateColorMain = item.ProvisioningState == "Succeeded" ? "40" : "red";
-                    item.Subnets.ToList().ForEach(itemSubnet =>
+                    string stateColorMain = azVnetListEntity[i].ProvisioningState == "Succeeded" ? "40" : "red";
+                    List<Dictionary<string, string>> itemsWithParamentersCommand = [];
+                    azVnetListEntity[i].Subnets.ForEach(itemSubnet => { itemsWithParamentersCommand.Add(new() { { "@@@Ids", itemSubnet } }); });
+                    azVnetListEntity[i].SubnetsDetails = Components.Progress.Show<AzSubnetEntity>($"Get Subnets for Vnet [yellow]([40]{azVnetListEntity[i].Name} [aqua]{i+1}[/][yellow]/[/][aqua]{azVnetListEntity.Length}[/][/])[/]", AzCommands.Subnet_Show, itemsWithParamentersCommand);
+                    List<KeyValuePair<Markup, Justify>> columnsSubnet =
+                    [
+                        new(new("AddressPrefix"), Justify.Left),
+                        new(new("Name"), Justify.Left),
+                        new(new("NetworkSecurityGroup"), Justify.Left),
+                        new(new("RouteTable"), Justify.Left),
+                        new(new("ProvisioningState"), Justify.Center)
+                    ];
+                    Spectre.Console.Table subnetTable = null;
+                    subnetTable = Components.Table.Show(true, $"[aqua]Subnets([40]{azVnetListEntity[i].Subnets.Count}[/])[/]", string.Empty, columnsSubnet);
+                    for (int j = 0; j < azVnetListEntity[i].Subnets.Count; j++)
                     {
-                        AzSubnetEntity azSubnetEntity = CommandHelper.Run<AzSubnetEntity>(AzCommands.Subnet_Show, new() { { "@@@Ids", itemSubnet } });
-                        Spectre.Console.Table subnetTable = null;
-                        if (azSubnetEntity != null)
+                        if (azVnetListEntity[i].SubnetsDetails[j] != null)
                         {
-                            azSubnetEntity.Id = itemSubnet;
-                            string stateColorSubnet = azSubnetEntity.ProvisioningState == "Succeeded" ? "40" : "red";
-                            List<KeyValuePair<Markup, Justify>> columnsSubnet =
-                            [
-                                new(new("AddressPrefix"), Justify.Left),
-                                new(new("Name"), Justify.Left),
-                                new(new("NetworkSecurityGroup"), Justify.Left),
-                                new(new("RouteTable"), Justify.Left),
-                                new(new("ProvisioningState"), Justify.Center)
-                            ];
-                            subnetTable = Components.Table.Show(true, $"[aqua]Subnets([40]{item.Subnets.Count}[/])[/]", string.Empty, columnsSubnet);
-                            item.SubnetsDetails.Add(azSubnetEntity);
-                            subnetTable.AddRow(new Markup($"[93]{azSubnetEntity.AddressPrefix}[/]"), new Markup($"[yellow]{azSubnetEntity.Name}[/]"), new Markup($"[yellow]{azSubnetEntity.NetworkSecurityGroup}[/]"), new Markup($"[yellow]{azSubnetEntity.RouteTable}[/]"), new Markup($"[{stateColorSubnet}]{azSubnetEntity.ProvisioningState}[/]"));
+                            azVnetListEntity[i].SubnetsDetails[j].Id = azVnetListEntity[i].Subnets[j];
+                            string stateColorSubnet = azVnetListEntity[i].SubnetsDetails[j].ProvisioningState == "Succeeded" ? "40" : "red";
+                            string[]? networkSecurityGroupArray = azVnetListEntity[i].SubnetsDetails[j]?.NetworkSecurityGroup?.Split("/", StringSplitOptions.RemoveEmptyEntries);
+                            string networkSecurityGroup = networkSecurityGroupArray != null && networkSecurityGroupArray.Length > 0 ? networkSecurityGroupArray[^1] : string.Empty;
+                            string[]? routeTableArray = azVnetListEntity[i].SubnetsDetails[j]?.RouteTable?.Split("/", StringSplitOptions.RemoveEmptyEntries);
+                            string routeTable = routeTableArray != null && routeTableArray.Length > 0 ? routeTableArray[^1] : string.Empty;
+                            string? addressPrefix = string.IsNullOrEmpty(azVnetListEntity[i].SubnetsDetails[j].AddressPrefix) ?
+                                azVnetListEntity[i].SubnetsDetails[j].AddressPrefixes != null && azVnetListEntity[i].SubnetsDetails[j].AddressPrefixes.Count > 0 ?
+                                    string.Join(", ", azVnetListEntity[i].SubnetsDetails[j].AddressPrefixes) :
+                                    string.Empty :
+                                azVnetListEntity[i].SubnetsDetails[j].AddressPrefix;
+                            subnetTable.AddRow(new Markup($"[93]{addressPrefix}[/]"), new Markup($"[yellow]{azVnetListEntity[i].SubnetsDetails[j].Name}[/]"), new Markup($"[yellow]{networkSecurityGroup}[/]"), new Markup($"[yellow]{routeTable}[/]"), new Markup($"[{stateColorSubnet}]{azVnetListEntity[i].SubnetsDetails[j].ProvisioningState}[/]"));
                         }
-                        mainTable.AddRow(new Markup($"[93]{item.Name}[/]"), new Markup($"[40]{item.ResourceGroup}[/]"), (subnetTable != null ? subnetTable : new Markup(string.Empty)), new Markup($"[{stateColorMain}]{item.ProvisioningState}[/]"));
-                    });
-                });
+                    }
+                    mainTable.AddRow(new Markup($"[93]{azVnetListEntity[i].Name}[/]"), new Markup($"[40]{azVnetListEntity[i].ResourceGroup}[/]"), (subnetTable != null ? subnetTable : new Markup(string.Empty)), new Markup($"[{stateColorMain}]{azVnetListEntity[i].ProvisioningState}[/]"));
+                }
                 FormatResults.Show<AzVnetListEntity[]>(azVnetListEntity, null, mainTable);
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
