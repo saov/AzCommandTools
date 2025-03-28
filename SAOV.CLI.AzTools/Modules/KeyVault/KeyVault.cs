@@ -34,7 +34,8 @@
 
         private static bool GetKeyVaultList()
         {
-            ModuleHeader.Show("/KeyVault/GetKeyVaultList");
+            string moduleName = "/KeyVault/GetKeyVaultList";
+            ModuleHeader.Show(moduleName);
             AzKeyVaultEntity[] azKeyVaultEntity = GetKeyVaultListData();
             if (azKeyVaultEntity != null)
             {
@@ -50,7 +51,7 @@
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[40]{item.ResourceGroup}[/]"), new($"[yellow]{item.Location}[/]")]);
                 });
                 string titleResult = $"[aqua]Azure KeyVaults([40]{rows.Count}[/])[/]";
-                FormatResults.Show<AzKeyVaultEntity[]>(azKeyVaultEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                FormatResults.Show<AzKeyVaultEntity[]>(azKeyVaultEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -60,7 +61,8 @@
 
         private static bool GetKeyVaultListWithNetworkRules()
         {
-            ModuleHeader.Show("/KeyVault/GetKeyVaultListWithNetworkRules");
+            string moduleName = "/KeyVault/GetKeyVaultListWithNetworkRules";
+            ModuleHeader.Show(moduleName);
             AzKeyVaultEntity[] azKeyVaultEntity = GetKeyVaultListData();
             if (azKeyVaultEntity != null)
             {
@@ -96,7 +98,7 @@
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[40]{item.ResourceGroup}[/]"), new($"[aqua]{item.NetworkRuleSetBypass}[/]"), new($"[{stateColor}]{item.NetworkRuleSetDefaultAction}[/]"), new($"[yellow]{item.Location}[/]")]);
                 });
                 string titleResult = $"[aqua]Azure KeyVaults With Network Rules([40]{rows.Count}[/])[/]";
-                FormatResults.Show<AzKeyVaultEntity[]>(azKeyVaultEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                FormatResults.Show<AzKeyVaultEntity[]>(azKeyVaultEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -116,7 +118,8 @@
                 while (showChoises)
                 {
                     AnsiConsole.Clear();
-                    ModuleHeader.Show("/KeyVault/GetKeyVaulSecretList");
+                    string moduleName = "/KeyVault/GetKeyVaulSecretList";
+                    ModuleHeader.Show(moduleName);
                     string keyvault = SelectionPrompt.Show(choices);
                     if (keyvault == "[93](x) [yellow]Cancel[/][/]")
                     {
@@ -143,7 +146,7 @@
                             rows.Add([new($"[93]{item.Name}[/]"), new(string.Empty)]);
                         });
                         string titleResult = $"[aqua]Azure Secrets of {Environment.NewLine}[yellow]\"[40]{keyvaultName}[/]\"[/]([40]{rows.Count}[/])[/]";
-                        FormatResults.Show<AzKeyVaultSecretEntity[]>(azKeyVaultSecretEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                        FormatResults.Show<AzKeyVaultSecretEntity[]>(azKeyVaultSecretEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                         AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                         _ = Console.ReadKey();
                     }
@@ -165,7 +168,8 @@
                 while (showChoises)
                 {
                     AnsiConsole.Clear();
-                    ModuleHeader.Show("/KeyVault/KeyVaultSecretShow");
+                    string moduleName = "/KeyVault/KeyVaultSecretShow";
+                    ModuleHeader.Show(moduleName);
                     string keyvault = SelectionPrompt.Show(choices);
                     if (keyvault == "[93](x) [yellow]Cancel[/][/]")
                     {
@@ -188,7 +192,7 @@
                         while (showChoisesKeyVaulSecret)
                         {
                             AnsiConsole.Clear();
-                            ModuleHeader.Show("/KeyVault/KeyVaultSecretShow");
+                            ModuleHeader.Show(moduleName);
                             string keyvaultSecret = SelectionPrompt.Show(choicestKeyVaulSecret, title: $"[yellow]Select an option of [yellow]\"[40]{keyvault}[/]\"[/] ([40]{choicestKeyVaulSecret.Count - 1}[/]).[/]");
                             if (keyvaultSecret == "[93](x) [yellow]Cancel[/][/]")
                             {
@@ -207,7 +211,7 @@
                                     List<List<Markup>> rows = [];
                                     rows.Add([new($"[93]{azKeyVaultSecretValueEntity.Name}[/]"), new($"[yellow]\"[40]{Markup.Escape(azKeyVaultSecretValueEntity.Value)}[/]\"[/]")]);
                                     string titleResult = $"[aqua]Azure Secret [yellow]\"[40]{keyvaultSecret}[/]\"[/] Value of [yellow]\"[40]{keyvault}[/]\"[/]([40]{rows.Count}[/])[/]";
-                                    FormatResults.Show<AzKeyVaultSecretEntity>(azKeyVaultSecretValueEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                                    FormatResults.Show<AzKeyVaultSecretEntity>(azKeyVaultSecretValueEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                                     AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                                     _ = Console.ReadKey();
                                 }
@@ -232,7 +236,8 @@
                 while (showChoises)
                 {
                     AnsiConsole.Clear();
-                    ModuleHeader.Show("/KeyVault/KeyVaultAllSecretShow");
+                    string moduleName = "/KeyVault/KeyVaultAllSecretShow";
+                    ModuleHeader.Show(moduleName);
                     string keyvault = SelectionPrompt.Show(choices);
                     if (keyvault == "[93](x) [yellow]Cancel[/][/]")
                     {
@@ -262,7 +267,7 @@
                             rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]\"[40]{Markup.Escape(item.Value)}[/]\"[/]")]);
                         });
                         string titleResult = $"[aqua]Azure All Secrets Values of KeyVault [yellow]\"[40]{keyvaultName}[/]\"[/]([40]{rows.Count}[/])[/]";
-                        FormatResults.Show<List<AzKeyVaultSecretEntity>>(secrets, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                        FormatResults.Show<List<AzKeyVaultSecretEntity>>(secrets, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                         AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                         _ = Console.ReadKey();
                     }

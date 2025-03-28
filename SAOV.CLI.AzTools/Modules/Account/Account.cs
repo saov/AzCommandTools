@@ -34,7 +34,8 @@
 
         private static bool LogIn()
         {
-            ModuleHeader.Show("/Account/LogIn");
+            string moduleName = "/Account/LogIn";
+            ModuleHeader.Show(moduleName);
             AzLoginEntity[] azLoginEntity = [];
             string tenantId = TextPrompt.Show("[93]Provide the [40]tenant id[/] :[/]", (value) => { return !string.IsNullOrWhiteSpace(value); }, "Field is required.", true);
             string serviceIdentity = TextPrompt.Show("[93]Provide the [40]service identity[/] :[/]", (value) => { return !string.IsNullOrWhiteSpace(value); }, "Field is required.", true);
@@ -97,7 +98,8 @@
 
         private static bool ShowCurrentSubscription()
         {
-            ModuleHeader.Show("/Account/ShowCurrentSubscription");
+            string moduleName = "/Account/ShowCurrentSubscription";
+            ModuleHeader.Show(moduleName);
             AzAccountShowEntity azAccountShowEntity = CommandHelper.Run<AzAccountShowEntity>(AzCommands.Account_Show, []);
             if (azAccountShowEntity != null)
             {
@@ -115,7 +117,7 @@
                 rows.Add([new($"[93]UserName[/]"), new($"[40]{azAccountShowEntity.UserName}[/]")]);
                 rows.Add([new($"[93]UserType[/]"), new($"[40]{azAccountShowEntity.UserType}[/]")]);
                 string titleResult = $"[aqua]Azure Account Info([40]{rows.Count}[/])[/]";
-                FormatResults.Show<AzAccountShowEntity>(azAccountShowEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                FormatResults.Show<AzAccountShowEntity>(azAccountShowEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -125,7 +127,8 @@
 
         private static bool GetSubscriptionList()
         {
-            ModuleHeader.Show("/Account/GetSubscriptionList");
+            string moduleName = "/Account/GetSubscriptionList";
+            ModuleHeader.Show(moduleName);
             AzAccountSubscriptionListEntity[] azAccountSubscriptionListEntity = GetSubscriptionListData();
             if (azAccountSubscriptionListEntity != null)
             {
@@ -142,7 +145,7 @@
                     rows.Add([new($"[93]{item.DisplayName}[/]"), new($"[yellow]{item.SubscriptionId}[/]"), new($"[{stateColor}]{item.State}[/]")]);
                 });
                 string titleResult = $"[aqua]Azure Subscriptions([40]{rows.Count}[/])[/]";
-                FormatResults.Show<AzAccountSubscriptionListEntity[]>(azAccountSubscriptionListEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                FormatResults.Show<AzAccountSubscriptionListEntity[]>(azAccountSubscriptionListEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;

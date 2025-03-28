@@ -32,7 +32,8 @@
 
         internal static bool GetResourceGroupList()
         {
-            ModuleHeader.Show("/ResourceGroup/GetResourceGroupList");
+            string moduleName = "/ResourceGroup/GetResourceGroupList";
+            ModuleHeader.Show(moduleName);
             AzResourceGroupListEntity[] azResourceGroupListEntity = GetResourceGroupListData();
             if (azResourceGroupListEntity != null)
             {
@@ -48,7 +49,7 @@
                     string stateColor = item.ProvisioningState == "Succeeded" ? "40" : "red";
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]{item.Location}[/]"), new($"[{stateColor}]{item.ProvisioningState}[/]")]);
                 });
-                FormatResults.Show<AzResourceGroupListEntity[]>(azResourceGroupListEntity, null, Components.Table.Show(true, $"[aqua]Azure ResourceGroups([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                FormatResults.Show<AzResourceGroupListEntity[]>(azResourceGroupListEntity, null, Components.Table.Show(true, $"[aqua]Azure ResourceGroups([40]{rows.Count}[/])[/]", string.Empty, columns, rows), moduleName.Replace("/", "_"));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -58,7 +59,8 @@
 
         internal static bool GetResourcesInResouceGroup()
         {
-            ModuleHeader.Show("/ResourceGroup/GetResourcesInResouceGroup");
+            string moduleName = "/ResourceGroup/GetResourcesInResouceGroup";
+            ModuleHeader.Show(moduleName);
             AzResourceGroupListEntity[] azResourceGroupListEntity = GetResourceGroupListData();
             List<string> choices = [];
             azResourceGroupListEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
@@ -91,7 +93,7 @@
                             rows.Add([new($"[93]{item.Name}[/]"), new($"[purple]{item.Type}[/]"), new($"[{stateColor}]{item.ProvisioningState}[/]"), new($"[yellow]{item.Location}[/]")]);
                         });
                         string titleResult = $"[aqua]Azure Resources In ResourceGroup [yellow]\"[40]{resourceGroupName}[/]\"[/]([40]{rows.Count}[/])[/]";
-                        FormatResults.Show<AzResourceGroupListEntity[]>(azResourcesInResourcesListEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                        FormatResults.Show<AzResourceGroupListEntity[]>(azResourcesInResourcesListEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                         AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                         _ = Console.ReadKey();
                         return true;

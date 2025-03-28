@@ -1,7 +1,6 @@
 ﻿namespace SAOV.CLI.AzTools.Components
 {
     using Spectre.Console;
-    using Spectre.Console.Rendering;
 
     internal static class Table
     {

@@ -41,7 +41,8 @@
 
         internal static bool GetExtensionsInstalledList()
         {
-            ModuleHeader.Show("/AzureCli/GetExtensionsInstalledList");
+            string moduleName = "/AzureCli/GetExtensionsInstalledList";
+            ModuleHeader.Show(moduleName);
             AzCliExtensionEntity[] azCliExtensionEntity = GetExtensionsInstalledListData();
             if (azCliExtensionEntity != null)
             {
@@ -56,7 +57,7 @@
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[green]{item.Version}[/]")]);
                 });
                 string titleResult = $"[aqua]Azure Installed Extensions([40]{rows.Count}[/])[/]";
-                FormatResults.Show<AzCliExtensionEntity[]>(azCliExtensionEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                FormatResults.Show<AzCliExtensionEntity[]>(azCliExtensionEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -66,7 +67,8 @@
 
         internal static bool GetExtensionsAvailableList()
         {
-            ModuleHeader.Show("/AzureCli/GetExtensionsAvailableList");
+            string moduleName = "/AzureCli/GetExtensionsAvailableList";
+            ModuleHeader.Show(moduleName);
             AzCliExtensionEntity[] azCliExtensionEntity = GetExtensionsAvailableListData();
             if (azCliExtensionEntity != null)
             {
@@ -82,7 +84,7 @@
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]{item.Summary}[/]"), new($"[green]{item.Version}[/]")]);
                 });
                 string titleResult = $"[aqua]Azure Available Extensions([40]{rows.Count}[/])[/]";
-                FormatResults.Show<AzCliExtensionEntity[]>(azCliExtensionEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows));
+                FormatResults.Show<AzCliExtensionEntity[]>(azCliExtensionEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;

@@ -3,7 +3,6 @@
     using SAOV.CLI.AzTools.Components;
     using SAOV.CLI.AzTools.Helpers;
     using SAOV.CLI.AzTools.Menus;
-    using SAOV.CLI.AzTools.Modules.KeyVault.Entities;
     using SAOV.CLI.AzTools.Modules.Vnet.Entities;
     using Spectre.Console;
     using System.Text;
@@ -33,7 +32,8 @@
 
         internal static bool GetVnetList()
         {
-            ModuleHeader.Show("/Vnet/GetVnetList");
+            string moduleName = "/Vnet/GetVnetList";
+            ModuleHeader.Show(moduleName);
             AzVnetListEntity[] azVnetListEntity = GetVnetListData();
             if (azVnetListEntity != null)
             {
@@ -62,7 +62,7 @@
                     }
                     rows.Add([new($"[93]{item.Name}[/]"), new($"[40]{item.ResourceGroup}[/]"), new($"[yellow]{sbAddressSpace}[/]"), new($"[yellow]{sbSubnets}[/]"), new($"[{stateColor}]{item.ProvisioningState}[/]")]);
                 });
-                FormatResults.Show<AzVnetListEntity[]>(azVnetListEntity, null, Components.Table.Show(true, $"[aqua]Azure Vnets([40]{rows.Count}[/])[/]", string.Empty, columns, rows));
+                FormatResults.Show<AzVnetListEntity[]>(azVnetListEntity, null, Components.Table.Show(true, $"[aqua]Azure Vnets([40]{rows.Count}[/])[/]", string.Empty, columns, rows), moduleName.Replace("/", "_"));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
@@ -72,7 +72,8 @@
 
         internal static bool GetVnetListWithSubnets()
         {
-            ModuleHeader.Show("/Vnet/GetVnetListWithSubnets");
+            string moduleName = "/Vnet/GetVnetListWithSubnets";
+            ModuleHeader.Show(moduleName);
             AzVnetListEntity[] azVnetListEntity = GetVnetListData();
             if (azVnetListEntity != null)
             {
@@ -121,7 +122,7 @@
                     }
                     mainTable.AddRow(new Markup($"[93]{azVnetListEntity[i].Name}[/]"), new Markup($"[40]{azVnetListEntity[i].ResourceGroup}[/]"), (subnetTable != null ? subnetTable : new Markup(string.Empty)), new Markup($"[{stateColorMain}]{azVnetListEntity[i].ProvisioningState}[/]"));
                 }
-                FormatResults.Show<AzVnetListEntity[]>(azVnetListEntity, null, mainTable);
+                FormatResults.Show<AzVnetListEntity[]>(azVnetListEntity, null, mainTable, moduleName.Replace("/","_"));
                 AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
                 _ = Console.ReadKey();
                 return true;
