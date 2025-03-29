@@ -112,6 +112,7 @@
             TreeNode menu_ResourceGroup = menu.AddNode(new Tree("[Turquoise2]ResourceGroup[/]"));
             _ = menu_ResourceGroup.AddNode(new Tree("[Gold1]GetResourceGroupList[/] [red]-->[/] Get ResourceGroup List"));
             _ = menu_ResourceGroup.AddNode(new Tree("[Gold1]GetResourcesInResouceGroup[/] [red]-->[/] Get Resources In ResouceGroup"));
+            _ = menu_ResourceGroup.AddNode(new Tree("[Gold1]GetResourcesInSubscription[/] [red]-->[/] Get Resources In Subscription"));
             TreeNode menu_Vnet = menu.AddNode(new Tree("[Turquoise2]Vnet[/]"));
             _ = menu_Vnet.AddNode(new Tree("[Gold1]GetVnetList[/] [red]-->[/] Get Vnet List"));
             _ = menu_Vnet.AddNode(new Tree("[Gold1]GetVnetListWithSubnets[/] [red]-->[/] Get Vnets With Subnets"));

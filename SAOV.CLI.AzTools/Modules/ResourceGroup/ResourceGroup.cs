@@ -23,6 +23,7 @@
                 {
                     ResourceGroupMenu.GetResourceGroupList => GetResourceGroupList(),
                     ResourceGroupMenu.GetResourcesInResouceGroup => GetResourcesInResouceGroup(),
+                    ResourceGroupMenu.GetResourcesInSubscription => GetResourcesInSubscription(),
                     ResourceGroupMenu.Exit => true,
                     _ => false
                 };
@@ -100,6 +101,40 @@
                     }
                 }
             }
+            return false;
+        }
+
+        internal static bool GetResourcesInSubscription()
+        {
+            string moduleName = "/ResourceGroup/GetResourcesInSubscription";
+            ModuleHeader.Show(moduleName);
+            string command = AzCommands.ResourceGroup_ResourcesListInSubscription;
+            command = !string.IsNullOrWhiteSpace(AzCommand.AzureQueryFilters) ?
+                                                                                command.Replace("@@@AzureQueryFilter", AzCommand.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
+                                                                                command.Replace("@@@AzureQueryFilter", "");
+            AzResourceGroupListEntity[] azResourcesInResourcesListEntity = CommandHelper.Run<AzResourceGroupListEntity[]>(command, []);
+                    if (azResourcesInResourcesListEntity != null)
+                    {
+                        List<KeyValuePair<Markup, Justify>> columns =
+                        [
+                            new(new("Name"), Justify.Left),
+                            new(new("ResourceGroup"), Justify.Left),
+                            new(new("Type"), Justify.Left),
+                            new(new("ProvisioningState"), Justify.Center),
+                            new(new("Location"), Justify.Left)
+                        ];
+                        List<List<Markup>> rows = [];
+                        azResourcesInResourcesListEntity.OrderBy(t => t.Name).ToList().ForEach(item =>
+                        {
+                            string stateColor = item.ProvisioningState == "Succeeded" ? "40" : "red";
+                            rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]{item.ResourceGroup}[/]"), new($"[purple]{item.Type}[/]"), new($"[{stateColor}]{item.ProvisioningState}[/]"), new($"[yellow]{item.Location}[/]")]);
+                        });
+                        string titleResult = $"[aqua]Azure Resources In Subscription ([40]{rows.Count}[/])[/]";
+                        FormatResults.Show<AzResourceGroupListEntity[]>(azResourcesInResourcesListEntity, new(titleResult), Components.Table.Show(true, titleResult, string.Empty, columns, rows), moduleName.Replace("/", "_"));
+                        AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
+                        _ = Console.ReadKey();
+                        return true;
+                    }
             return false;
         }
 

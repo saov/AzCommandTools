@@ -11,6 +11,9 @@
             SubnetsDetails = [];
         }
 
+        [JsonPropertyName("id")]
+        public string? Id { get; set; }
+
         [JsonPropertyName("addressSpace")]
         public List<string> AddressSpace { get; set; }
 

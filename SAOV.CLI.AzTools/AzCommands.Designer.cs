@@ -124,7 +124,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az extension list-available --query &quot;[@@@AzureQueryFilter].{name:name, summary:summary, version:version}&quot;.
+        ///   Looks up a localized string similar to az extension list-available --query &quot;[].{name:name, summary:summary, version:version}&quot;.
         /// </summary>
         internal static string AzureCli_ExtensionsAvailableList {
             get {
@@ -196,7 +196,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az keyvault secret show --vault-name @@@KeyVault --name @@@SecretName --query &quot;{name:name, value:value}&quot;.
+        ///   Looks up a localized string similar to az keyvault secret show --vault-name @@@KeyVault --name @@@SecretName --query &quot;{id:id, name:name, value:value}&quot;.
         /// </summary>
         internal static string KeyVault_SecretShow {
             get {
@@ -205,7 +205,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az group list --query &quot;[@@@AzureQueryFilter].{name:name, location:location, provisioningState:properties.provisioningState}&quot;.
+        ///   Looks up a localized string similar to az group list --query &quot;[@@@AzureQueryFilter].{id:id, name:name, location:location, provisioningState:properties.provisioningState}&quot;.
         /// </summary>
         internal static string ResourceGroup_List {
             get {
@@ -214,7 +214,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az resource list --resource-group @@@ResourceGroup --query &quot;[].{name:name, location:location, provisioningState:provisioningState, type:type}&quot;.
+        ///   Looks up a localized string similar to az resource list --resource-group @@@ResourceGroup --query &quot;[].{id:id, name:name, location:location, provisioningState:provisioningState, type:type}&quot;.
         /// </summary>
         internal static string ResourceGroup_ResourcesList {
             get {
@@ -223,7 +223,16 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az network vnet subnet show --ids @@@Ids --query &quot;{addressPrefix:addressPrefix,addressPrefixes:addressPrefixes,name:name,provisioningState:provisioningState,networkSecurityGroup:networkSecurityGroup.id,routeTable:routeTable.id}&quot;.
+        ///   Looks up a localized string similar to az resource list --query &quot;[@@@AzureQueryFilter].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}&quot;.
+        /// </summary>
+        internal static string ResourceGroup_ResourcesListInSubscription {
+            get {
+                return ResourceManager.GetString("ResourceGroup-ResourcesListInSubscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az network vnet subnet show --ids @@@Ids --query &quot;{id:id, addressPrefix:addressPrefix,addressPrefixes:addressPrefixes,name:name,provisioningState:provisioningState,networkSecurityGroup:networkSecurityGroup.id,routeTable:routeTable.id}&quot;.
         /// </summary>
         internal static string Subnet_Show {
             get {
@@ -232,7 +241,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az network vnet list --query &quot;[@@@AzureQueryFilter].{addressSpace:addressSpace.addressPrefixes,name:name,provisioningState:provisioningState,resourceGroup:resourceGroup,subnets:subnets[*].id}&quot;.
+        ///   Looks up a localized string similar to az network vnet list --query &quot;[@@@AzureQueryFilter].{id:id, addressSpace:addressSpace.addressPrefixes,name:name,provisioningState:provisioningState,resourceGroup:resourceGroup,subnets:subnets[*].id}&quot;.
         /// </summary>
         internal static string Vnet_List {
             get {

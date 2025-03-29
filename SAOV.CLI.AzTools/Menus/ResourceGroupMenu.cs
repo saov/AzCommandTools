@@ -10,6 +10,9 @@
         [Display(Name = "Get Resources In ResouceGroup")]
         GetResourcesInResouceGroup = 2,
 
+        [Display(Name = "Get Resources In Subscription")]
+        GetResourcesInSubscription = 3,
+
         [Display(Name = "Exit")]
         Exit = 99,
     }

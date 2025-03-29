@@ -7,8 +7,9 @@
     <Nullable>enable</Nullable>
     <RepositoryUrl>https://github.com/saov/AzCommandTools</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>2.6.4.0</AssemblyVersion>
-    <FileVersion>2.6.4.0</FileVersion>
+    <AssemblyVersion>2.6.5.0</AssemblyVersion>
+    <FileVersion>2.6.5.0</FileVersion>
+    <PackAsTool>False</PackAsTool>
   </PropertyGroup>
 
   <ItemGroup>
