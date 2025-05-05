@@ -1,21 +1,34 @@
 ﻿namespace SAOV.CLI.AzTools.Helpers
 {
+    using System;
     using System.Diagnostics;
+    using System.Text;
 
     internal static class AzHelper
     {
         internal static (bool Success, string Output) GetAzureInfo(string command)
         {
+            if (AzCommand.AZSDebug)
+            {
+                string fileName = $"azs_Commands-{DateTime.Now:yyyyMMdd}.txt";
+                File.AppendAllText(fileName, $"{command}\n");
+            }
             using Process process = new();
             process.StartInfo = GetProcessStartInfo(command);
             process.Start();
             process.WaitForExit(30000);
-            string output = process.StandardOutput.ReadToEnd();
+            StringBuilder sb = new();
+            string output = string.Empty;
+            while ((output = process.StandardOutput.ReadLine()) != null)
+            {
+                sb.AppendLine(output);
+            }
             if (process.ExitCode != 0)
             {
-                output = process.StandardError.ReadToEnd();
+                sb = new();
+                sb.Append(process.StandardError.ReadToEnd());
             }
-            return (process.ExitCode == 0, output);
+            return (process.ExitCode == 0, sb.ToString());
         }
 
         private static ProcessStartInfo GetProcessStartInfo(string command)

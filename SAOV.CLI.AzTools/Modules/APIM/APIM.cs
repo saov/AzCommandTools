@@ -119,22 +119,26 @@
                     APIMEntity[] aPIMEntity = AzAPIManagementList(apimName);
                     if (aPIMEntity != null)
                     {
-                        List<KeyValuePair<Markup, Justify>> columnsMain =
-                        [
-                            new(new("APIM"), Justify.Left),
-                            new(new("Operations"), Justify.Center)
-                        ];
-                        Spectre.Console.Table mainTable = Components.Table.Show(true, $"[aqua]Azure APIM ([40]{apim}[/]) APIs([40]{aPIMEntity.Length}[/])[/]", string.Empty, columnsMain);
-                        aPIMEntity = aPIMEntity.OrderBy(t => t.Name).ToArray();
-                        for (int i = 0; i < aPIMEntity.Length; i++)
+                        List<string> choicesAPIMs = [];
+                        aPIMEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choicesAPIMs.Add($"{item.Name}"); });
+                        choicesAPIMs.Add($"[93](x) [yellow]Cancel[/][/]");
+                        bool showChoisesAPIMs = true;
+                        while (showChoisesAPIMs)
                         {
-                            AnsiConsole.Write(new Markup(aPIMEntity[i].Name));
-                            string stateColor = aPIMEntity[i].SubscriptionRequired ? "40" : "red";
+                            AnsiConsole.Clear();
+                            moduleName = "/APIM/GetAPIMListWithOperations";
+                            ModuleHeader.Show(moduleName);
+                            string api = SelectionPrompt.Show(choicesAPIMs);
+                            if (api == "[93](x) [yellow]Cancel[/][/]")
+                            {
+                                showChoises = false;
+                                return true;
+                            }
                             string command = AzCommands.APIManagement_OperationList.Replace("@@@ResourceGroup", apimName.ResourceGroup)
                                                                                    .Replace("@@@APIM", apimName.Name)
-                                                                                   .Replace("@@@APIs", aPIMEntity[i].Name);
-                            aPIMEntity[i].Operations = CommandHelper.Run<APIMOperationEntity[]>(command, []);
-                            List<KeyValuePair<Markup, Justify>> columnsOperation =
+                                                                                   .Replace("@@@APIs", api);
+                            APIMOperationEntity[] operations = CommandHelper.Run<APIMOperationEntity[]>(command, []);
+                            List<KeyValuePair<Markup, Justify>> columns =
                             [
                                 new(new("Name"), Justify.Left),
                                 new(new("DisplayName"), Justify.Left),
@@ -142,27 +146,15 @@
                                 new(new("Method"), Justify.Left),
                                 new(new("StatusCode"), Justify.Center)
                             ];
-                            Spectre.Console.Table operationTable = null;
-                            operationTable = Components.Table.Show(true, $"[aqua]Operations([40]{aPIMEntity[i].Operations.Length}[/])[/]", string.Empty, columnsOperation);
-                            for (int j = 0; j < aPIMEntity[i].Operations.Length; j++)
+                            List<List<Markup>> rows = [];
+                            operations.OrderBy(t => t.Name).ToList().ForEach(item =>
                             {
-                                if (aPIMEntity[i].Operations != null)
-                                {
-                                    operationTable.AddRow(new Markup($"[93]{aPIMEntity[i].Operations[j].Name}[/]"),
-                                                          new Markup($"[yellow]{aPIMEntity[i].Operations[j].DisplayName}[/]"),
-                                                          new Markup($"[40]{aPIMEntity[i].Operations[j].ResourceGroup}[/]"),
-                                                          new Markup($"[93]{aPIMEntity[i].Operations[j].Method}[/]"),
-                                                          new Markup($"[yellow]{aPIMEntity[i].Operations[j].StatusCode}[/]"));
-
-                                }
-                            }
-                            mainTable.AddRow(new Markup($"Name : [93]{aPIMEntity[i].Name}[/]\nDisplayName : [yellow]{aPIMEntity[i].DisplayName}[/]\nPath : [yellow]{aPIMEntity[i].Path}[/]\nResourceGroup : [40]{aPIMEntity[i].ResourceGroup}[/]\nServiceUrl : [yellow]{aPIMEntity[i].ServiceUrl}[/]\nSubscriptionRequired : [{stateColor}]{aPIMEntity[i].SubscriptionRequired}[/]"),
-                                             (operationTable != null ? operationTable : new Markup(string.Empty)));
+                                rows.Add([new($"[93]{item.Name}[/]"), new($"[yellow]{item.DisplayName}[/]"), new($"{item.Method}"), new($"[40]{item.ResourceGroup}[/]"), new($"{item.StatusCode}")]);
+                            });
+                            FormatResults.Show<APIMEntity[]>(aPIMEntity, null, Components.Table.Show(true, $"[aqua]Azure Operations([40]{operations.Length}[/])[/]", string.Empty, columns, rows), moduleName.Replace("/", "_"));
+                            AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
+                            _ = Console.ReadKey();
                         }
-                        FormatResults.Show<APIMEntity[]>(aPIMEntity, null, mainTable, moduleName.Replace("/", "_"));
-                        AnsiConsole.Write(new Markup("[green]Press any key to back.[/]"));
-                        _ = Console.ReadKey();
-                        return true;
                     }
                 }
             }

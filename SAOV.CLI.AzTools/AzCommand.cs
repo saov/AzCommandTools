@@ -19,12 +19,15 @@
     {
         internal static string? AzureQueryFilters;
         internal static string? Filters;
+        internal static bool AZSDebug;
 
         public sealed class Settings : CommandSettings
         {
             [Description("Resource Search Filter.")]
             [CommandArgument(0, "[filter]")]
             public string? Filter { get; set; }
+            [CommandArgument(1, "[aZSDebug]")]
+            public string? AZSDebug { get; set; }
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
@@ -32,6 +35,10 @@
             if (!string.IsNullOrWhiteSpace(settings.Filter))
             {
                 SetFilter(settings.Filter);
+            }
+            if (!string.IsNullOrWhiteSpace(settings.AZSDebug))
+            {
+                AZSDebug = true;
             }
             AzCliVersionEntity azVersionEntity = CommandHelper.Run<AzCliVersionEntity>(AzCommands.AzureCli_Version, [], false, false);
             if (azVersionEntity != null)

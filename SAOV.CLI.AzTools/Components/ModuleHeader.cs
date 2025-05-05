@@ -3,6 +3,7 @@
     using SAOV.CLI.AzTools.Helpers;
     using SAOV.CLI.AzTools.Modules.Account.Entities;
     using Spectre.Console;
+    using System.Reflection;
 
     internal static class ModuleHeader
     {
@@ -27,7 +28,7 @@
             AnsiConsole.Clear();
             AnsiConsole.Write(new Panel(grid)
             {
-                Header = new PanelHeader($"[Turquoise2]SAOV Azure Tools in [40]{Environment.UserName}[red]@[/]{Environment.MachineName}[/][/]")
+                Header = new PanelHeader($"[Turquoise2]SAOV Azure Tools [Gold1]v{Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString()}[/] in [40]{Environment.UserName}[red]@[/]{Environment.MachineName}[/][/]")
             });
             AnsiConsole.WriteLine();
         }
