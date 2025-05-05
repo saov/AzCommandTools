@@ -49,6 +49,7 @@
                     {
                         MainMenu.AzureCli => AzureCli.Show(),
                         MainMenu.Account => Account.Show(),
+                        MainMenu.APIM => APIM.Show(),
                         MainMenu.KeyVault => KeyVault.Show(),
                         MainMenu.ResourceGroup => ResourceGroup.Show(),
                         MainMenu.Vnet => Vnet.Show(),
@@ -103,6 +104,9 @@
             _ = menu_Account.AddNode(new Tree("[Gold1]ShowCurrentSubscription[/] [red]-->[/] Show Current Subscription"));
             _ = menu_Account.AddNode(new Tree("[Gold1]GetSubscriptionList[/] [red]-->[/] Get Subscription List"));
             _ = menu_Account.AddNode(new Tree("[Gold1]SetSubscription[/] [red]-->[/] Set Subscription"));
+            TreeNode menu_APIM = menu.AddNode(new Tree("[Turquoise2]APIM[/]"));
+            _ = menu_APIM.AddNode(new Tree("[Gold1]GetAPIMList[/] [red]-->[/] Get APIM List"));
+            _ = menu_APIM.AddNode(new Tree("[Gold1]GetAPIMListWithOperations[/] [red]-->[/] Get APIM List With Operations"));
             TreeNode menu_KeyVault = menu.AddNode(new Tree("[Turquoise2]KeyVault[/]"));
             _ = menu_KeyVault.AddNode(new Tree("[Gold1]GetKeyVaultList[/] [red]-->[/] Get KeyVault List"));
             _ = menu_KeyVault.AddNode(new Tree("[Gold1]GetKeyVaultListWithNetworkRules[/] [red]-->[/] Get KeyVault List With Network Rules"));

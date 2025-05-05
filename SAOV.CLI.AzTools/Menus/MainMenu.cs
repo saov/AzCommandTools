@@ -10,14 +10,17 @@
         [Display(Name = "Account")]
         Account = 2,
 
+        [Display(Name = "APIM")]
+        APIM = 3,
+
         [Display(Name = "KeyVault")]
-        KeyVault = 3,
+        KeyVault = 4,
 
         [Display(Name = "ResourceGroup")]
-        ResourceGroup = 4,
+        ResourceGroup = 5,
 
         [Display(Name = "Vnet")]
-        Vnet = 5,
+        Vnet = 6,
 
         [Display(Name = "Query Filters")]
         QueryFilters = 97,

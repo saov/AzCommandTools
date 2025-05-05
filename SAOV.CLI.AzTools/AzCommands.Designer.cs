@@ -106,6 +106,24 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to az apim api list --resource-group @@@ResourceGroup --service-name @@@APIM --query &quot;[].{id:id, displayName:displayName, name:name, path:path, resourceGroup:resourceGroup, serviceUrl:serviceUrl, subscriptionRequired:subscriptionRequired}&quot;.
+        /// </summary>
+        internal static string APIManagement_List {
+            get {
+                return ResourceManager.GetString("APIManagement-List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az apim api operation list --resource-group @@@ResourceGroup --service-name @@@APIM --api-id @@@APIs --query &quot;[].{id:id, displayName:displayName, method:method, name:name, resourceGroup:resourceGroup, statusCode:statusCode}&quot;.
+        /// </summary>
+        internal static string APIManagement_OperationList {
+            get {
+                return ResourceManager.GetString("APIManagement-OperationList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to az extension add --name @@@ExtensionName.
         /// </summary>
         internal static string AzureCli_ExtensionAdd {
@@ -169,7 +187,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az keyvault list --query &quot;[@@@AzureQueryFilter].{name:name, resourceGroup:resourceGroup, location:location}&quot;.
+        ///   Looks up a localized string similar to az keyvault list --query &quot;[@@@AzureQueryFilter].{id:id, name:name, resourceGroup:resourceGroup, location:location}&quot;.
         /// </summary>
         internal static string KeyVault_List {
             get {
@@ -223,11 +241,20 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az resource list --query &quot;[@@@AzureQueryFilter].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}&quot;.
+        ///   Looks up a localized string similar to az resource list --query &quot;[@@@AzureQueryFilter &amp;&amp; type==&apos;@@@ResourceType&apos;].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}&quot;.
         /// </summary>
         internal static string ResourceGroup_ResourcesListInSubscription {
             get {
                 return ResourceManager.GetString("ResourceGroup-ResourcesListInSubscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az resource list --query &quot;[@@@AzureQueryFilter &amp;&amp; type==&apos;@@@ResourceType&apos;].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}&quot;.
+        /// </summary>
+        internal static string ResourceGroup_ResourcesListInSubscriptionFilterType {
+            get {
+                return ResourceManager.GetString("ResourceGroup-ResourcesListInSubscriptionFilterType", resourceCulture);
             }
         }
         

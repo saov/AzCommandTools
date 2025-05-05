@@ -132,6 +132,12 @@
   <data name="Account-SubscriptionList" xml:space="preserve">
     <value>az account subscription list --query "[].{displayName:displayName, state:state, subscriptionId:subscriptionId}"</value>
   </data>
+  <data name="APIManagement-List" xml:space="preserve">
+    <value>az apim api list --resource-group @@@ResourceGroup --service-name @@@APIM --query "[].{id:id, displayName:displayName, name:name, path:path, resourceGroup:resourceGroup, serviceUrl:serviceUrl, subscriptionRequired:subscriptionRequired}"</value>
+  </data>
+  <data name="APIManagement-OperationList" xml:space="preserve">
+    <value>az apim api operation list --resource-group @@@ResourceGroup --service-name @@@APIM --api-id @@@APIs --query "[].{id:id, displayName:displayName, method:method, name:name, resourceGroup:resourceGroup, statusCode:statusCode}"</value>
+  </data>
   <data name="AzureCli-ExtensionAdd" xml:space="preserve">
     <value>az extension add --name @@@ExtensionName</value>
   </data>
@@ -172,7 +178,10 @@
     <value>az resource list --resource-group @@@ResourceGroup --query "[].{id:id, name:name, location:location, provisioningState:provisioningState, type:type}"</value>
   </data>
   <data name="ResourceGroup-ResourcesListInSubscription" xml:space="preserve">
-    <value>az resource list --query "[@@@AzureQueryFilter].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}"</value>
+    <value>az resource list --query "[@@@AzureQueryFilter &amp;&amp; type=='@@@ResourceType'].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}"</value>
+  </data>
+  <data name="ResourceGroup-ResourcesListInSubscriptionFilterType" xml:space="preserve">
+    <value>az resource list --query "[@@@AzureQueryFilter &amp;&amp; type=='@@@ResourceType'].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}"</value>
   </data>
   <data name="Subnet-Show" xml:space="preserve">
     <value>az network vnet subnet show --ids @@@Ids --query "{id:id, addressPrefix:addressPrefix,addressPrefixes:addressPrefixes,name:name,provisioningState:provisioningState,networkSecurityGroup:networkSecurityGroup.id,routeTable:routeTable.id}"</value>
