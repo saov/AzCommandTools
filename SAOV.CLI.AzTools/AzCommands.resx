@@ -132,6 +132,15 @@
   <data name="Account-SubscriptionList" xml:space="preserve">
     <value>az account subscription list --query "[].{displayName:displayName, state:state, subscriptionId:subscriptionId}"</value>
   </data>
+  <data name="ACR-Repositories" xml:space="preserve">
+    <value>az acr repository list --name "@@@ACRName"</value>
+  </data>
+  <data name="ACR-RepositoryTags" xml:space="preserve">
+    <value>az acr repository show-tags --name "@@@ACRName" --repository "@@@ACRRepositoryName"</value>
+  </data>
+  <data name="ACR-Show" xml:space="preserve">
+    <value>az acr show --name "@@@ACRName" --query "{anonymousPullEnabled:anonymousPullEnabled, dataEndpointHostNames:dataEndpointHostNames[0], id:id, location:location, loginServer:loginServer, name:name, networkRuleBypassOptions:networkRuleBypassOptions, networkRuleSetDefaultAction:networkRuleSet.defaultAction, provisioningState:provisioningState, publicNetworkAccess:publicNetworkAccess, resourceGroup:resourceGroup, skuName:sku.name, skuTier:sku.tier, type:type, zoneRedundancy:zoneRedundancy}"</value>
+  </data>
   <data name="APIManagement-List" xml:space="preserve">
     <value>az apim api list --resource-group @@@ResourceGroup --service-name @@@APIM --query "[].{id:id, displayName:displayName, name:name, path:path, resourceGroup:resourceGroup, serviceUrl:serviceUrl, subscriptionRequired:subscriptionRequired}"</value>
   </data>
@@ -178,7 +187,7 @@
     <value>az resource list --resource-group @@@ResourceGroup --query "[].{id:id, name:name, location:location, provisioningState:provisioningState, type:type}"</value>
   </data>
   <data name="ResourceGroup-ResourcesListInSubscription" xml:space="preserve">
-    <value>az resource list --query "[@@@AzureQueryFilter &amp;&amp; type=='@@@ResourceType'].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}"</value>
+    <value>az resource list --query "[@@@AzureQueryFilter].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}"</value>
   </data>
   <data name="ResourceGroup-ResourcesListInSubscriptionFilterType" xml:space="preserve">
     <value>az resource list --query "[@@@AzureQueryFilter &amp;&amp; type=='@@@ResourceType'].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}"</value>

@@ -1,4 +1,4 @@
-﻿namespace SAOV.CLI.AzTools.Modules.ResourceGroup
+﻿namespace SAOV.CLI.AzTools.Modules.APIM
 {
     using SAOV.CLI.AzTools.Components;
     using SAOV.CLI.AzTools.Helpers;
@@ -142,8 +142,8 @@
                             [
                                 new(new("Name"), Justify.Left),
                                 new(new("DisplayName"), Justify.Left),
-                                new(new("ResourceGroup"), Justify.Left),
                                 new(new("Method"), Justify.Left),
+                                new(new("ResourceGroup"), Justify.Left),
                                 new(new("StatusCode"), Justify.Center)
                             ];
                             List<List<Markup>> rows = [];

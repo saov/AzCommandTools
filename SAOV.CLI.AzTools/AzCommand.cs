@@ -4,6 +4,8 @@
     using SAOV.CLI.AzTools.Helpers;
     using SAOV.CLI.AzTools.Menus;
     using SAOV.CLI.AzTools.Modules.Account;
+    using SAOV.CLI.AzTools.Modules.ACR;
+    using SAOV.CLI.AzTools.Modules.APIM;
     using SAOV.CLI.AzTools.Modules.AzureCli;
     using SAOV.CLI.AzTools.Modules.AzureCli.Entities;
     using SAOV.CLI.AzTools.Modules.KeyVault;
@@ -56,6 +58,7 @@
                     {
                         MainMenu.AzureCli => AzureCli.Show(),
                         MainMenu.Account => Account.Show(),
+                        MainMenu.ACR => ACR.Show(),
                         MainMenu.APIM => APIM.Show(),
                         MainMenu.KeyVault => KeyVault.Show(),
                         MainMenu.ResourceGroup => ResourceGroup.Show(),
@@ -111,6 +114,10 @@
             _ = menu_Account.AddNode(new Tree("[Gold1]ShowCurrentSubscription[/] [red]-->[/] Show Current Subscription"));
             _ = menu_Account.AddNode(new Tree("[Gold1]GetSubscriptionList[/] [red]-->[/] Get Subscription List"));
             _ = menu_Account.AddNode(new Tree("[Gold1]SetSubscription[/] [red]-->[/] Set Subscription"));
+            TreeNode menu_ACR = menu.AddNode(new Tree("[Turquoise2]ACR[/]"));
+            _ = menu_ACR.AddNode(new Tree("[Gold1]GetACRList[/] [red]-->[/] Get ACR List"));
+            _ = menu_ACR.AddNode(new Tree("[Gold1]GetACRRepositories[/] [red]-->[/] Get ACR Repositories"));
+            _ = menu_ACR.AddNode(new Tree("[Gold1]GetACRRepositoryTags[/] [red]-->[/] Get ACR Repository Tags"));
             TreeNode menu_APIM = menu.AddNode(new Tree("[Turquoise2]APIM[/]"));
             _ = menu_APIM.AddNode(new Tree("[Gold1]GetAPIMList[/] [red]-->[/] Get APIM List"));
             _ = menu_APIM.AddNode(new Tree("[Gold1]GetAPIMListWithOperations[/] [red]-->[/] Get APIM List With Operations"));

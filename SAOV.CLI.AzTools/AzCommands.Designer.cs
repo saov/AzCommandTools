@@ -106,6 +106,33 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to az acr repository list --name &quot;@@@ACRName&quot;.
+        /// </summary>
+        internal static string ACR_Repositories {
+            get {
+                return ResourceManager.GetString("ACR-Repositories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az acr repository show-tags --name &quot;@@@ACRName&quot; --repository &quot;@@@ACRRepositoryName&quot;.
+        /// </summary>
+        internal static string ACR_RepositoryTags {
+            get {
+                return ResourceManager.GetString("ACR-RepositoryTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to az acr show --name &quot;@@@ACRName&quot; --query &quot;{anonymousPullEnabled:anonymousPullEnabled, dataEndpointHostNames:dataEndpointHostNames[0], id:id, location:location, loginServer:loginServer, name:name, networkRuleBypassOptions:networkRuleBypassOptions, networkRuleSetDefaultAction:networkRuleSet.defaultAction, provisioningState:provisioningState, publicNetworkAccess:publicNetworkAccess, resourceGroup:resourceGroup, skuName:sku.name, skuTier:sku.tier, type:type, zoneRedundancy:zoneRedundancy}&quot;.
+        /// </summary>
+        internal static string ACR_Show {
+            get {
+                return ResourceManager.GetString("ACR-Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to az apim api list --resource-group @@@ResourceGroup --service-name @@@APIM --query &quot;[].{id:id, displayName:displayName, name:name, path:path, resourceGroup:resourceGroup, serviceUrl:serviceUrl, subscriptionRequired:subscriptionRequired}&quot;.
         /// </summary>
         internal static string APIManagement_List {
@@ -241,7 +268,7 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to az resource list --query &quot;[@@@AzureQueryFilter &amp;&amp; type==&apos;@@@ResourceType&apos;].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}&quot;.
+        ///   Looks up a localized string similar to az resource list --query &quot;[@@@AzureQueryFilter].{id:id, name:name, location:location, provisioningState:provisioningState, resourceGroup:resourceGroup, type:type}&quot;.
         /// </summary>
         internal static string ResourceGroup_ResourcesListInSubscription {
             get {
