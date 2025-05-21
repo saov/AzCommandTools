@@ -45,8 +45,8 @@
                 List<KeyValuePair<Markup, Justify>> columns =
                 [
                     new(new("Name"), Justify.Left),
-                    new(new(""), Justify.Left),
-                    new(new(""), Justify.Left)
+                    new(new(string.Empty), Justify.Left),
+                    new(new(string.Empty), Justify.Left)
                 ];
                 List<List<Markup>> rows = [];
                 aCRs.ToList().ForEach(item =>
@@ -80,7 +80,7 @@
             AzResourceGroupListEntity[] azResourceGroupListEntity = GetResourceGroupListData();
             List<string> choices = [];
             azResourceGroupListEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azResourceGroupListEntity != null)
             {
                 bool showChoises = true;
@@ -90,7 +90,7 @@
                     string moduleName = "/ACR/GetACRRepositories";
                     ModuleHeader.Show(moduleName);
                     string acr = SelectionPrompt.Show(choices);
-                    if (acr == "[93](x) [yellow]Cancel[/][/]")
+                    if (acr == AzCommands.Choise_Cancel)
                     {
                         showChoises = false;
                         return true;
@@ -125,7 +125,7 @@
             AzResourceGroupListEntity[] azResourceGroupListEntity = GetResourceGroupListData();
             List<string> choices = [];
             azResourceGroupListEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azResourceGroupListEntity != null)
             {
                 bool showChoises = true;
@@ -135,7 +135,7 @@
                     string moduleName = "/ACR/GetACRRepositoryTags";
                     ModuleHeader.Show(moduleName);
                     string acr = SelectionPrompt.Show(choices);
-                    if (acr == "[93](x) [yellow]Cancel[/][/]")
+                    if (acr == AzCommands.Choise_Cancel)
                     {
                         showChoises = false;
                         return true;
@@ -149,16 +149,16 @@
                     string[] repositories = GetACRRepositoriesData(aCRName);
                     List<string> choicesRepositories = [];
                     repositories.OrderBy(t => t).ToList().ForEach(item => { choicesRepositories.Add($"{item}"); });
-                    choicesRepositories.Add($"[93](x) [yellow]Cancel[/][/]");
+                    choicesRepositories.Add(AzCommands.Choise_Cancel);
                     bool showChoisesRepositories = true;
                     while (showChoisesRepositories)
                     {
                         AnsiConsole.Clear();
                         ModuleHeader.Show(moduleName);
                         string repository = SelectionPrompt.Show(choicesRepositories);
-                        if (repository == "[93](x) [yellow]Cancel[/][/]")
+                        if (repository == AzCommands.Choise_Cancel)
                         {
-                            showChoises = false;
+                            showChoisesRepositories = false;
                             return true;
                         }
                         string[] repositoryTags = CommandHelper.Run<string[]>(AzCommands.ACR_RepositoryTags, new() { { "@@@ACRName", aCRName }, { "@@@ACRRepositoryName", repository } });
@@ -186,7 +186,7 @@
             string command = AzCommands.ResourceGroup_ResourcesListInSubscriptionFilterType.Replace("@@@ResourceType", "Microsoft.ContainerRegistry/registries");
             command = !string.IsNullOrWhiteSpace(AzCommand.AzureQueryFilters) ?
                                                                                 command.Replace("@@@AzureQueryFilter", AzCommand.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
-                                                                                command.Replace("@@@AzureQueryFilter", "");
+                                                                                command.Replace("@@@AzureQueryFilter", string.Empty);
             command = command.Replace("[ && ", "[?");
             return CommandHelper.Run<AzResourceGroupListEntity[]>(command, []);
         }

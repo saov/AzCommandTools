@@ -5,7 +5,7 @@
 
     internal static class CommandHelper
     {
-        internal static T Run<T>(string command, Dictionary<string, string> paramentersCommand, bool withoutStatus = false, bool showStandardError = true)
+        internal static T? Run<T>(string command, Dictionary<string, string> paramentersCommand, bool withoutStatus = false, bool showStandardError = true, bool outputIsPlainText = false)
         {
             foreach (var item in paramentersCommand)
             {
@@ -14,12 +14,11 @@
             (bool Success, string Output) = withoutStatus ?
                                                 AzHelper.GetAzureInfo(command) :
                                                 Components.Status.Show<(bool Success, string Output)>("Wait Azure response ...", () => { return AzHelper.GetAzureInfo(command); });
-            if (Success)
+            if (Success && !string.IsNullOrWhiteSpace(Output))
             {
-                if (!string.IsNullOrWhiteSpace(Output))
-                {
-                    return JsonSerializer.Deserialize<T>(Output);
-                }
+                return outputIsPlainText ?
+                            (T)Convert.ChangeType(Output, typeof(T)) :
+                            JsonSerializer.Deserialize<T>(Output);
             }
             else
             {

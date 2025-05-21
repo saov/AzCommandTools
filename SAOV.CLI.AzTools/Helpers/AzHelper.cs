@@ -57,10 +57,10 @@
         private static string GetShellCommand(string command)
         {
             return OperatingSystem.IsWindows() ?
-                   @$"/c ""{command}""" :
-                   OperatingSystem.IsLinux() ?
-                     @$"-c ""{command.Replace("\"", "\\\"")}""" :
-                    throw new Exception("Unknown OperatingSystem.");
+                        @$"/c ""{command}""" :
+                        OperatingSystem.IsLinux() ?
+                            @$"-c ""{command.Replace("\"", "\\\"")}""" :
+                            throw new Exception("Unknown OperatingSystem.");
         }
     }
 }

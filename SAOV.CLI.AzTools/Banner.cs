@@ -10,6 +10,9 @@
     {
         internal static void Show()
         {
+            AzCommand.KubernetesCurrentContext = CommandHelper.Run<string>(AzCommands.Kubernetes_CurrentContext, [], showStandardError: false, outputIsPlainText: true)?.Replace("\r\n", string.Empty)
+                                                                                                                                                                        .Replace("\r", string.Empty)
+                                                                                                                                                                        .Replace("\n", string.Empty);
             AzAccountShowEntity azAccountShowEntity = CommandHelper.Run<AzAccountShowEntity>(AzCommands.Account_Show, [], false, false);
             string subscription = azAccountShowEntity == null ?
                                     string.Empty :
@@ -66,7 +69,9 @@
                 .Border(TableBorder.None)
                 .AddColumn(string.Empty)
                 .AddRow(new Markup($"[Magenta1]Subscription [yellow]:[/][/] {subscription}").LeftJustified())
-                .AddRow(new Markup($"[Magenta1]Query Filter [yellow]:[/][/] [red]{filters}[/]"))
+                .AddRow(new Markup($"[Magenta1]Azure Query Filter [yellow]:[/][/] [red]{filters}[/]"))
+                .AddRow(new Markup($"[Magenta1]Kubernetes Context [yellow]:[/][/] [40]{AzCommand.KubernetesCurrentContext}[/]"))
+                .AddRow(new Markup($"[Magenta1]Kubernetes NameSpace [yellow]:[/][/] [40]{AzCommand.KubernetesCurrentNameSpace}[/]"))
                 .HideHeaders()
                 .HideFooters()
                 .HideRowSeparators()

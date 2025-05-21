@@ -135,7 +135,7 @@
             string command = AzCommands.Vnet_List;
             command = !string.IsNullOrWhiteSpace(AzCommand.AzureQueryFilters) ?
                                                                                 command.Replace("@@@AzureQueryFilter", AzCommand.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
-                                                                                command.Replace("@@@AzureQueryFilter", "");
+                                                                                command.Replace("@@@AzureQueryFilter", string.Empty);
             return CommandHelper.Run<AzVnetListEntity[]>(command, []);
         }
     }

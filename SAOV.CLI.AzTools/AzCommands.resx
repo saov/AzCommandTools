@@ -168,6 +168,12 @@
   <data name="AzureCli-Version" xml:space="preserve">
     <value>az version</value>
   </data>
+  <data name="Choise-Cancel" xml:space="preserve">
+    <value>[93](x) [yellow]Cancel[/][/]</value>
+  </data>
+  <data name="Docker-SystemPrune" xml:space="preserve">
+    <value>docker system prune -a -f --volumes</value>
+  </data>
   <data name="KeyVault-List" xml:space="preserve">
     <value>az keyvault list --query "[@@@AzureQueryFilter].{id:id, name:name, resourceGroup:resourceGroup, location:location}"</value>
   </data>
@@ -179,6 +185,18 @@
   </data>
   <data name="KeyVault-SecretShow" xml:space="preserve">
     <value>az keyvault secret show --vault-name @@@KeyVault --name @@@SecretName --query "{id:id, name:name, value:value}"</value>
+  </data>
+  <data name="Kubernetes-CurrentContext" xml:space="preserve">
+    <value>kubectl config current-context</value>
+  </data>
+  <data name="Kubernetes-DeletePodsNotRunning" xml:space="preserve">
+    <value>kubectl delete pods --field-selector=status.phase!="Running" -n @@@NameSpaceName</value>
+  </data>
+  <data name="Kubernetes-ListNameSpaces" xml:space="preserve">
+    <value>kubectl get ns -o=jsonpath="{range .items[?(@.status.phase=='Active')]}{.metadata.name}{'\n'}{end}"</value>
+  </data>
+  <data name="Kubernetes-ListSecrets" xml:space="preserve">
+    <value>kubectl get secrets -n @@@NameSpaceName -o=jsonpath="{range .items[*]}{.metadata.name}{'\n'}{end}"</value>
   </data>
   <data name="ResourceGroup-List" xml:space="preserve">
     <value>az group list --query "[@@@AzureQueryFilter].{id:id, name:name, location:location, provisioningState:properties.provisioningState}"</value>

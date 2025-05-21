@@ -159,11 +159,11 @@
             List<AzAccountSubscriptionListEntity> azAccountSubscriptionListEntity = GetSubscriptionListData().ToList().Where(t => t.State == "Enabled").OrderBy(t => t.DisplayName).ToList();
             List<string> choices = [];
             azAccountSubscriptionListEntity.ForEach(item => { choices.Add($"{item.DisplayName}({item.SubscriptionId})"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azAccountSubscriptionListEntity != null)
             {
                 string subscription = SelectionPrompt.Show(choices);
-                if (subscription != "[93](x) [yellow]Cancel[/][/]")
+                if (subscription != AzCommands.Choise_Cancel)
                 {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                     string subscriptionId = azAccountSubscriptionListEntity.Where(t => t.State == "Enabled" && subscription.Contains(t.SubscriptionId))

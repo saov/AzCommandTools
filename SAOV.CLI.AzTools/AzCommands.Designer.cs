@@ -214,6 +214,24 @@ namespace SAOV.CLI.AzTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [93](x) [yellow]Cancel[/][/].
+        /// </summary>
+        internal static string Choise_Cancel {
+            get {
+                return ResourceManager.GetString("Choise-Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to docker system prune -a -f --volumes.
+        /// </summary>
+        internal static string Docker_SystemPrune {
+            get {
+                return ResourceManager.GetString("Docker-SystemPrune", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to az keyvault list --query &quot;[@@@AzureQueryFilter].{id:id, name:name, resourceGroup:resourceGroup, location:location}&quot;.
         /// </summary>
         internal static string KeyVault_List {
@@ -246,6 +264,42 @@ namespace SAOV.CLI.AzTools {
         internal static string KeyVault_SecretShow {
             get {
                 return ResourceManager.GetString("KeyVault-SecretShow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kubectl config current-context.
+        /// </summary>
+        internal static string Kubernetes_CurrentContext {
+            get {
+                return ResourceManager.GetString("Kubernetes-CurrentContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kubectl delete pods --field-selector=status.phase!=&quot;Running&quot; -n @@@NameSpaceName.
+        /// </summary>
+        internal static string Kubernetes_DeletePodsNotRunning {
+            get {
+                return ResourceManager.GetString("Kubernetes-DeletePodsNotRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kubectl get ns -o=jsonpath=&quot;{range .items[?(@.status.phase==&apos;Active&apos;)]}{.metadata.name}{&apos;\n&apos;}{end}&quot;.
+        /// </summary>
+        internal static string Kubernetes_ListNameSpaces {
+            get {
+                return ResourceManager.GetString("Kubernetes-ListNameSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kubectl get secrets -n @@@NameSpaceName -o=jsonpath=&quot;{range .items[*]}{.metadata.name}{&apos;\n&apos;}{end}&quot;.
+        /// </summary>
+        internal static string Kubernetes_ListSecrets {
+            get {
+                return ResourceManager.GetString("Kubernetes-ListSecrets", resourceCulture);
             }
         }
         

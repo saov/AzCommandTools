@@ -111,7 +111,7 @@
             AzKeyVaultEntity[] azKeyVaultEntity = GetKeyVaultListData();
             List<string> choices = [];
             azKeyVaultEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azKeyVaultEntity != null)
             {
                 bool showChoises = true;
@@ -121,7 +121,7 @@
                     string moduleName = "/KeyVault/GetKeyVaulSecretList";
                     ModuleHeader.Show(moduleName);
                     string keyvault = SelectionPrompt.Show(choices);
-                    if (keyvault == "[93](x) [yellow]Cancel[/][/]")
+                    if (keyvault == AzCommands.Choise_Cancel)
                     {
                         showChoises = false;
                         return true;
@@ -161,7 +161,7 @@
             AzKeyVaultEntity[] azKeyVaultEntity = GetKeyVaultListData();
             List<string> choices = [];
             azKeyVaultEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azKeyVaultEntity != null)
             {
                 bool showChoises = true;
@@ -171,7 +171,7 @@
                     string moduleName = "/KeyVault/KeyVaultSecretShow";
                     ModuleHeader.Show(moduleName);
                     string keyvault = SelectionPrompt.Show(choices);
-                    if (keyvault == "[93](x) [yellow]Cancel[/][/]")
+                    if (keyvault == AzCommands.Choise_Cancel)
                     {
                         showChoises = false;
                         return true;
@@ -187,14 +187,14 @@
                     {
                         List<string> choicestKeyVaulSecret = [];
                         azKeyVaultSecretEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choicestKeyVaulSecret.Add($"{item.Name}"); });
-                        choicestKeyVaulSecret.Add($"[93](x) [yellow]Cancel[/][/]");
+                        choicestKeyVaulSecret.Add(AzCommands.Choise_Cancel);
                         bool showChoisesKeyVaulSecret = true;
                         while (showChoisesKeyVaulSecret)
                         {
                             AnsiConsole.Clear();
                             ModuleHeader.Show(moduleName);
                             string keyvaultSecret = SelectionPrompt.Show(choicestKeyVaulSecret, title: $"[yellow]Select an option of [yellow]\"[40]{keyvault}[/]\"[/] ([40]{choicestKeyVaulSecret.Count - 1}[/]).[/]");
-                            if (keyvaultSecret == "[93](x) [yellow]Cancel[/][/]")
+                            if (keyvaultSecret == AzCommands.Choise_Cancel)
                             {
                                 showChoisesKeyVaulSecret = false;
                             }
@@ -229,7 +229,7 @@
             AzKeyVaultEntity[] azKeyVaultEntity = GetKeyVaultListData();
             List<string> choices = [];
             azKeyVaultEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azKeyVaultEntity != null)
             {
                 bool showChoises = true;
@@ -239,7 +239,7 @@
                     string moduleName = "/KeyVault/KeyVaultAllSecretShow";
                     ModuleHeader.Show(moduleName);
                     string keyvault = SelectionPrompt.Show(choices);
-                    if (keyvault == "[93](x) [yellow]Cancel[/][/]")
+                    if (keyvault == AzCommands.Choise_Cancel)
                     {
                         showChoises = false;
                         return true;
@@ -282,7 +282,7 @@
             string command = AzCommands.KeyVault_List;
             command = !string.IsNullOrWhiteSpace(AzCommand.AzureQueryFilters) ?
                                                                                 command.Replace("@@@AzureQueryFilter", AzCommand.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
-                                                                                command.Replace("@@@AzureQueryFilter", "");
+                                                                                command.Replace("@@@AzureQueryFilter", string.Empty);
             return CommandHelper.Run<AzKeyVaultEntity[]>(command, []);
         }
 

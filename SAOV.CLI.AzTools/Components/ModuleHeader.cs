@@ -23,7 +23,13 @@
                 new Markup($"[navy]Module [/][yellow]: [/][orange3]{path}[/]").LeftJustified()
             ]);
             grid.AddRow([
-                new Markup($"[navy]Filter [/][yellow]: [/][red]{filters}[/]").RightJustified().LeftJustified()                
+                new Markup($"[navy]Azure Filter [/][yellow]: [/][red]{filters}[/]").RightJustified().LeftJustified()
+            ]);
+            grid.AddRow([
+                new Markup($"[navy]Kubernetes Context [/][yellow]: [/][40]{AzCommand.KubernetesCurrentContext}[/]").RightJustified().LeftJustified()
+            ]);
+            grid.AddRow([
+                new Markup($"[navy]Kubernetes NameSpace [/][yellow]: [/][40]{AzCommand.KubernetesCurrentNameSpace}[/]").RightJustified().LeftJustified()
             ]);
             AnsiConsole.Clear();
             AnsiConsole.Write(new Panel(grid)

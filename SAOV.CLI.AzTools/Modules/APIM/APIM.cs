@@ -37,7 +37,7 @@
             AzResourceGroupListEntity[] azResourcesInResourcesListEntity = GetResourceGroupListData();
             List<string> choices = [];
             azResourcesInResourcesListEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name} ({item.ResourceGroup})"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azResourcesInResourcesListEntity != null)
             {
                 bool showChoises = true;
@@ -47,7 +47,7 @@
                     string moduleName = "/APIM/GetAPIMList";
                     ModuleHeader.Show(moduleName);
                     string apim = SelectionPrompt.Show(choices);
-                    if (apim == "[93](x) [yellow]Cancel[/][/]")
+                    if (apim == AzCommands.Choise_Cancel)
                     {
                         showChoises = false;
                         return true;
@@ -93,7 +93,7 @@
             AzResourceGroupListEntity[] azResourcesInResourcesListEntity = GetResourceGroupListData();
             List<string> choices = [];
             azResourcesInResourcesListEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name} ({item.ResourceGroup})"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azResourcesInResourcesListEntity != null)
             {
                 bool showChoises = true;
@@ -103,7 +103,7 @@
                     string moduleName = "/APIM/GetAPIMListWithOperations";
                     ModuleHeader.Show(moduleName);
                     string apim = SelectionPrompt.Show(choices);
-                    if (apim == "[93](x) [yellow]Cancel[/][/]")
+                    if (apim == AzCommands.Choise_Cancel)
                     {
                         showChoises = false;
                         return true;
@@ -121,7 +121,7 @@
                     {
                         List<string> choicesAPIMs = [];
                         aPIMEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choicesAPIMs.Add($"{item.Name}"); });
-                        choicesAPIMs.Add($"[93](x) [yellow]Cancel[/][/]");
+                        choicesAPIMs.Add(AzCommands.Choise_Cancel);
                         bool showChoisesAPIMs = true;
                         while (showChoisesAPIMs)
                         {
@@ -129,7 +129,7 @@
                             moduleName = "/APIM/GetAPIMListWithOperations";
                             ModuleHeader.Show(moduleName);
                             string api = SelectionPrompt.Show(choicesAPIMs);
-                            if (api == "[93](x) [yellow]Cancel[/][/]")
+                            if (api == AzCommands.Choise_Cancel)
                             {
                                 showChoises = false;
                                 return true;
@@ -166,7 +166,7 @@
             string command = AzCommands.ResourceGroup_ResourcesListInSubscriptionFilterType.Replace("@@@ResourceType", "Microsoft.ApiManagement/service");
             command = !string.IsNullOrWhiteSpace(AzCommand.AzureQueryFilters) ?
                                                                                 command.Replace("@@@AzureQueryFilter", AzCommand.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
-                                                                                command.Replace("@@@AzureQueryFilter", "");
+                                                                                command.Replace("@@@AzureQueryFilter", string.Empty);
             command = command.Replace("[ && ", "[?");
             return CommandHelper.Run<AzResourceGroupListEntity[]>(command, []);
         }

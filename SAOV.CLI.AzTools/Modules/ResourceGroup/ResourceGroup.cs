@@ -65,11 +65,11 @@
             AzResourceGroupListEntity[] azResourceGroupListEntity = GetResourceGroupListData();
             List<string> choices = [];
             azResourceGroupListEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azResourceGroupListEntity != null)
             {
                 string resourceGroup = SelectionPrompt.Show(choices);
-                if (resourceGroup != "[93](x) [yellow]Cancel[/][/]")
+                if (resourceGroup != AzCommands.Choise_Cancel)
                 {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                     string resourceGroupName = azResourceGroupListEntity.Where(t => resourceGroup.Contains(t.Name))
@@ -111,7 +111,7 @@
             string command = AzCommands.ResourceGroup_ResourcesListInSubscription;
             command = !string.IsNullOrWhiteSpace(AzCommand.AzureQueryFilters) ?
                                                                                 command.Replace("@@@AzureQueryFilter", AzCommand.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
-                                                                                command.Replace("@@@AzureQueryFilter", "");
+                                                                                command.Replace("@@@AzureQueryFilter", string.Empty);
             AzResourceGroupListEntity[] azResourcesInResourcesListEntity = CommandHelper.Run<AzResourceGroupListEntity[]>(command, []);
                     if (azResourcesInResourcesListEntity != null)
                     {
@@ -143,7 +143,7 @@
             string command = AzCommands.ResourceGroup_List;
             command = !string.IsNullOrWhiteSpace(AzCommand.AzureQueryFilters) ?
                                                                                 command.Replace("@@@AzureQueryFilter", AzCommand.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
-                                                                                command.Replace("@@@AzureQueryFilter", "");
+                                                                                command.Replace("@@@AzureQueryFilter", string.Empty);
             return CommandHelper.Run<AzResourceGroupListEntity[]>(command, []);
         }
     }

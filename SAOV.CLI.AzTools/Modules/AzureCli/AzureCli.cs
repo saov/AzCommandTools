@@ -98,11 +98,11 @@
             AzCliExtensionEntity[] azCliExtensionEntity = GetExtensionsInstalledListData();
             List<string> choices = [];
             azCliExtensionEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}({item.Version})"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azCliExtensionEntity != null)
             {
                 string extension = SelectionPrompt.Show(choices);
-                if (extension != "[93](x) [yellow]Cancel[/][/]")
+                if (extension != AzCommands.Choise_Cancel)
                 {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                     string extensionName = azCliExtensionEntity.Where(t => extension.Contains(t.Name))
@@ -122,11 +122,11 @@
             AzCliExtensionEntity[] azCliExtensionEntity = GetExtensionsAvailableListData();
             List<string> choices = [];
             azCliExtensionEntity.ToList().ForEach(item => { choices.Add($"({item.Name}){item.Summary}({item.Version})"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azCliExtensionEntity != null)
             {
                 string extension = SelectionPrompt.Show(choices);
-                if (extension != "[93](x) [yellow]Cancel[/][/]")
+                if (extension != AzCommands.Choise_Cancel)
                 {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                     string extensionName = azCliExtensionEntity.Where(t => extension.Contains(t.Summary))
@@ -146,11 +146,11 @@
             AzCliExtensionEntity[] azCliExtensionEntity = GetExtensionsInstalledListData();
             List<string> choices = [];
             azCliExtensionEntity.OrderBy(t => t.Name).ToList().ForEach(item => { choices.Add($"{item.Name}({item.Version})"); });
-            choices.Add($"[93](x) [yellow]Cancel[/][/]");
+            choices.Add(AzCommands.Choise_Cancel);
             if (azCliExtensionEntity != null)
             {
                 string extension = SelectionPrompt.Show(choices);
-                if (extension != "[93](x) [yellow]Cancel[/][/]")
+                if (extension != AzCommands.Choise_Cancel)
                 {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                     string extensionName = azCliExtensionEntity.Where(t => extension.Contains(t.Name))
@@ -174,7 +174,7 @@
             string command = AzCommands.AzureCli_ExtensionsAvailableList;
             command = !string.IsNullOrWhiteSpace(AzCommand.AzureQueryFilters) ?
                                                                                 command.Replace("@@@AzureQueryFilter", AzCommand.AzureQueryFilters).Replace("@@@AzureQueryFilterPropertyName", "name") :
-                                                                                command.Replace("@@@AzureQueryFilter", "");
+                                                                                command.Replace("@@@AzureQueryFilter", string.Empty);
             return CommandHelper.Run<AzCliExtensionEntity[]>(command, []);
         }
     }

@@ -4,26 +4,32 @@
 
     public enum MainMenu
     {
+        [Display(Name = "Docker")]
+        Docker = 1,
+
+        [Display(Name = "Kubernetes")]
+        Kubernetes = 2,
+
         [Display(Name = "Az Cli")]
-        AzureCli = 1,
+        AzureCli = 3,
 
         [Display(Name = "Account")]
-        Account = 2,
+        Account = 4,
 
         [Display(Name = "ACR")]
-        ACR = 3,
+        ACR = 5,
 
         [Display(Name = "APIM")]
-        APIM = 4,
+        APIM = 6,
 
         [Display(Name = "KeyVault")]
-        KeyVault = 5,
+        KeyVault = 7,
 
         [Display(Name = "ResourceGroup")]
-        ResourceGroup = 6,
+        ResourceGroup = 8,
 
         [Display(Name = "Vnet")]
-        Vnet = 7,
+        Vnet = 9,
 
         [Display(Name = "Query Filters")]
         QueryFilters = 97,
